@@ -28,7 +28,7 @@ class ZohoServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'../../config/zoho.php', 'zoho-config'
+            __DIR__.'../../config/zoho.php', 'zoho'
         );
         $this->registerSingleton();
     }
