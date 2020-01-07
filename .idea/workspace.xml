@@ -175,7 +175,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578406081014</updated>
-      <workItem from="1578406084901" duration="6046000" />
+      <workItem from="1578406084901" duration="7265000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1578406232370</created>
@@ -198,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578412089322</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="testing direct configuration">
+      <created>1578412323807</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1578412323807</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,7 +216,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="update AppServiceProvider" />
     <MESSAGE value="update service provider" />
-    <option name="LAST_COMMIT_MESSAGE" value="update service provider" />
+    <MESSAGE value="testing direct configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing direct configuration" />
   </component>
   <component name="WindowStateProjectService">
     <state x="341" y="53" key="#APITest.can_initiate_connection_with_zoho_crm" timestamp="1578408542910">
@@ -228,10 +236,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1578410247041" />
-    <state x="301" y="65" key="CommitChangelistDialog2" timestamp="1578412089206">
+    <state x="301" y="65" key="CommitChangelistDialog2" timestamp="1578412323710">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="301" y="65" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1578412089206" />
+    <state x="301" y="65" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1578412323710" />
     <state width="1398" height="226" key="GridCell.Tab.0.bottom" timestamp="1578409505474">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
