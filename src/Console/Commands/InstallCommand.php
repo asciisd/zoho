@@ -4,21 +4,21 @@ namespace Asciisd\Zoho\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class ZohoCommand extends Command
+class InstallCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'zoho:command';
+    protected $signature = 'zoho:install';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Install zoho package resources';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,10 @@ class ZohoCommand extends Command
      */
     public function handle()
     {
-        //
+        $this->comment('Publishing Zoho OAuth files ...');
+        $this->callSilent('vendor:publish', ['--tag' => 'zoho-oauth']);
+        $this->comment('Publishing Zoho Configuration ...');
+        $this->callSilent('vendor:publish', ['--tag' => 'zoho-config']);
+        $this->info('Zoho CRM scaffolding installed successfully.');
     }
 }
