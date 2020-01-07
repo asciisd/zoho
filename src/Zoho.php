@@ -9,10 +9,11 @@ class Zoho
     /**
      * get all modules from your crm
      *
+     * @param RestClient $client
      * @return array
      */
-    public static function getAllModules()
+    public static function getAllModules(RestClient $client)
     {
-        return RestClient::getAllModules();
+        return $client->getAllModules();
     }
 }

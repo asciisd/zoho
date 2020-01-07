@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="be360660-52f2-4191-b919-814755579202" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Providers/ZohoServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Providers/ZohoServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RestClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/RestClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Zoho.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Zoho.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +177,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578406081014</updated>
-      <workItem from="1578406084901" duration="7265000" />
+      <workItem from="1578406084901" duration="8334000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1578406232370</created>
@@ -205,7 +207,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578412323807</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update service provider">
+      <created>1578414143483</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578414143483</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,9 +224,9 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="update AppServiceProvider" />
-    <MESSAGE value="update service provider" />
     <MESSAGE value="testing direct configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="testing direct configuration" />
+    <MESSAGE value="update service provider" />
+    <option name="LAST_COMMIT_MESSAGE" value="update service provider" />
   </component>
   <component name="WindowStateProjectService">
     <state x="341" y="53" key="#APITest.can_initiate_connection_with_zoho_crm" timestamp="1578408542910">
@@ -236,10 +245,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1578410247041" />
-    <state x="301" y="65" key="CommitChangelistDialog2" timestamp="1578412323710">
+    <state x="301" y="65" key="CommitChangelistDialog2" timestamp="1578414143377">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="301" y="65" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1578412323710" />
+    <state x="301" y="65" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1578414143377" />
     <state width="1398" height="226" key="GridCell.Tab.0.bottom" timestamp="1578409505474">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

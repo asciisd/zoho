@@ -1,7 +1,7 @@
 {
   "name": "asciisd/zoho",
   "description": "",
-  "keywords": ["Laravel"],
+  "keywords": ["Laravel", "zoho", "crm"],
   "authors": [
     {
       "name": "Amr Ahmed",

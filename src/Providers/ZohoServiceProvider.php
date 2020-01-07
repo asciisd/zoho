@@ -5,7 +5,6 @@ namespace Asciisd\Zoho\Providers;
 use Asciisd\Zoho\Console\Commands\InstallCommand;
 use Asciisd\Zoho\Console\Commands\SetupCommand;
 use Illuminate\Support\ServiceProvider;
-use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
 class ZohoServiceProvider extends ServiceProvider
 {
@@ -94,23 +93,6 @@ class ZohoServiceProvider extends ServiceProvider
 
     private function registerSingleton()
     {
-        $this->app->singleton(ZCRMRestClient::class, function ($app) {
-            $configuration = [
-                'client_id' => config('zoho.client_id'),
-                'client_secret' => config('zoho.client_secret'),
-                'redirect_uri' => config('zoho.redirect_uri'),
-                'currentUserEmail' => config('zoho.current_user_email'),
-                'applicationLogFilePath' => config('zoho.application_log_file_path'),
-                'token_persistence_path' => config('zoho.token_persistence_path'),
-                'accounts_url' => config('zoho.accounts_url'),
-                'sandbox' => config('zoho.sandbox'),
-                'apiBaseUrl' => config('zoho.api_base_url'),
-                'apiVersion' => config('zoho.api_version'),
-                'access_type' => config('zoho.access_type'),
-                'persistence_handler_class' => config('zoho.persistence_handler_class'),
-            ];
-
-            ZCRMRestClient::initialize($configuration);
-        });
+        //
     }
 }
