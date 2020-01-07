@@ -173,7 +173,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578406081014</updated>
-      <workItem from="1578406084901" duration="8742000" />
+      <workItem from="1578406084901" duration="8824000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1578406232370</created>
@@ -231,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578415482066</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update service provider">
+      <created>1578415586713</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1578415586713</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,10 +271,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="458" y="212" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1578410247041" />
-    <state x="301" y="65" key="CommitChangelistDialog2" timestamp="1578415481974">
+    <state x="301" y="65" key="CommitChangelistDialog2" timestamp="1578415586620">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="301" y="65" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1578415481974" />
+    <state x="301" y="65" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1578415586620" />
     <state width="1398" height="226" key="GridCell.Tab.0.bottom" timestamp="1578409505474">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
