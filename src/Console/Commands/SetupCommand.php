@@ -2,8 +2,8 @@
 
 namespace Asciisd\Zoho\Console\Commands;
 
+use Asciisd\Zoho\RestClient;
 use Illuminate\Console\Command;
-use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 use zcrmsdk\oauth\exception\ZohoOAuthException;
 use zcrmsdk\oauth\ZohoOAuth;
 
@@ -36,19 +36,20 @@ class SetupCommand extends Command
     /**
      * Execute the console command.
      *
+     * @param RestClient $client
      * @return mixed
      * @throws ZohoOAuthException
      */
-    public function handle()
+    public function handle(RestClient $client)
     {
         $grantToken = $this->ask('Please enter your Grant Token');
         if (!$grantToken) {
             $this->comment('The Grant Token is required.');
             return;
         }
-        ZCRMRestClient::initialize($this->getAllCredentials());
-        $oAuthClient = ZohoOAuth::getClientInstance();
-        $oAuthTokens = $oAuthClient->generateAccessToken($grantToken);
+
+        $client->generateAccessToken($grantToken);
+
         $this->info('Zoho CRM has been set up successfully.');
     }
 }

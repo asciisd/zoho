@@ -2,15 +2,15 @@
 
 namespace Asciisd\Zoho;
 
-use Illuminate\Support\Facades\Artisan;
 use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 use zcrmsdk\oauth\ZohoOAuth;
 
 class RestClient
 {
-    public function __construct($configuration)
+    public function generateAccessToken($grantToken)
     {
-        ZCRMRestClient::initialize($configuration);
+        $oAuthClient = ZohoOAuth::getClientInstance();
+        return $oAuthClient->generateAccessToken($grantToken);
     }
 
     public static function getOrganizationDetails()

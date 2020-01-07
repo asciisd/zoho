@@ -11,13 +11,13 @@
   "homepage": "https://github.com/asciisd/zoho",
   "require": {
     "php": "^7.1.3",
-    "laravel/framework": "6.*"
+    "laravel/framework": "6.*",
+    "zohocrm/php-sdk": "^2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.5",
     "orchestra/testbench": "^4.4",
-    "phpstan/phpstan": "^0.12",
-    "zohocrm/php-sdk": "^2.0"
+    "phpstan/phpstan": "^0.12"
   },
   "license": "MIT",
   "autoload": {

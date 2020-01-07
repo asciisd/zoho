@@ -6,6 +6,7 @@ use Asciisd\Zoho\Console\Commands\InstallCommand;
 use Asciisd\Zoho\Console\Commands\SetupCommand;
 use Asciisd\Zoho\RestClient;
 use Illuminate\Support\ServiceProvider;
+use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
 class ZohoServiceProvider extends ServiceProvider
 {
@@ -108,11 +109,11 @@ class ZohoServiceProvider extends ServiceProvider
          * Uncomment this function call to load the config file.
          * If the config file is also publishable, it will merge with that file
          */
-        $this->mergeConfigFrom(
-            __DIR__ . '/../../config/zoho.php', 'zoho'
-        );
+//        $this->mergeConfigFrom(
+//            __DIR__ . '/../../config/zoho.php', 'zoho'
+//        );
 
-        $this->app->singleton(RestClient::class, function ($app) {
+        $this->app->singleton(ZCRMRestClient::class, function ($app) {
             $configuration = [
                 'client_id' => config('zoho.client_id'),
                 'client_secret' => config('zoho.client_secret'),
@@ -128,7 +129,7 @@ class ZohoServiceProvider extends ServiceProvider
                 'persistence_handler_class' => config('zoho.persistence_handler_class'),
             ];
 
-            return new RestClient($configuration);
+            ZCRMRestClient::initialize($configuration);
         });
     }
 }

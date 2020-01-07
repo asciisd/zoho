@@ -11,7 +11,7 @@ return [
     | description
     |
     */
-    'client_id' =>  env('ZOHO_CRM_CLIENT_ID', null),
+    'client_id' =>  env('ZOHO_CLIENT_ID', null),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -20,7 +20,7 @@ return [
     | description
     |
     */
-    'client_secret' =>  env('ZOHO_CRM_CLIENT_SECRET', null),
+    'client_secret' =>  env('ZOHO_CLIENT_SECRET', null),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -29,7 +29,7 @@ return [
     | description
     |
     */
-    'redirect_uri' =>  env('ZOHO_CRM_REDIRECT_URI', null),
+    'redirect_uri' =>  env('ZOHO_REDIRECT_URI', null),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -38,7 +38,7 @@ return [
     | description
     |
     */
-    'current_user_email' =>  env('ZOHO_CRM_CURRENT_USER_EMAIL', null),
+    'current_user_email' =>  env('ZOHO_CURRENT_USER_EMAIL', null),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -65,7 +65,7 @@ return [
     | description
     |
     */
-    'accounts_url' =>  env('ZOHO_CRM_ACCOUNTS_URL', 'https://accounts.zoho.com'),
+    'accounts_url' =>  env('ZOHO_ACCOUNTS_URL', 'https://accounts.zoho.com'),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -74,7 +74,7 @@ return [
     | description
     |
     */
-    'sandbox' =>  env('ZOHO_CRM_SANDBOX', false),
+    'sandbox' =>  env('ZOHO_SANDBOX', false),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -83,7 +83,7 @@ return [
     | description
     |
     */
-    'api_base_url' =>  env('ZOHO_CRM_API_BASE_URL', 'www.zohoapis.com'),
+    'api_base_url' =>  env('ZOHO_API_BASE_URL', 'www.zohoapis.com'),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -92,7 +92,7 @@ return [
     | description
     |
     */
-    'api_version' =>  env('ZOHO_CRM_API_VERSION', 'v2'),
+    'api_version' =>  env('ZOHO_API_VERSION', 'v2'),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -101,7 +101,7 @@ return [
     | description
     |
     */
-    'access_type' =>  env('ZOHO_CRM_ACCESS_TYPE', 'offline'),
+    'access_type' =>  env('ZOHO_ACCESS_TYPE', 'offline'),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -110,5 +110,5 @@ return [
     | description
     |
     */
-    'persistence_handler_class' =>  env('ZOHO_CRM_PERSISTENCE_HANDLER_CLASS', 'ZohoOAuthPersistenceHandler'),
+    'persistence_handler_class' =>  env('ZOHO_PERSISTENCE_HANDLER_CLASS', 'ZohoOAuthPersistenceHandler'),
 ];
