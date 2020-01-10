@@ -39,10 +39,10 @@ class ZohoInstallCommand extends Command
     public function handle()
     {
         $this->comment('Publishing Zoho OAuth files ...');
-        $this->callSilent('provider:publish', ['--tag' => 'zoho-oauth']);
+        $this->callSilent('vendor:publish', ['--tag' => 'zoho-oauth']);
 
         $this->comment('Publishing Zoho Configuration ...');
-        $this->callSilent('provider:publish', ['--tag' => 'zoho-config']);
+        $this->callSilent('vendor:publish', ['--tag' => 'zoho-config']);
 
         $this->info('Zoho scaffolding installed successfully.');
     }
