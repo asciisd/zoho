@@ -40,8 +40,8 @@ class ZohoInstallCommand extends Command
     public function handle()
     {
         $this->comment('Generate Zoho OAuth files ...');
-        Storage::disk('local')->put('oauth/logs/ZCRMClientLibrary.log', '');
-        Storage::disk('local')->put('oauth/tokens/zcrm_oauthtokens.txt', '');
+        Storage::disk('local')->put('app/zoho/oauth/logs/ZCRMClientLibrary.log', '');
+        Storage::disk('local')->put('app/zoho/oauth/tokens/zcrm_oauthtokens.txt', '');
 
         $this->comment('Publishing Zoho Configuration ...');
         $this->callSilent('vendor:publish', ['--tag' => 'zoho-config']);
