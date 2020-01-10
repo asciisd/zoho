@@ -9,8 +9,8 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="zoho Unit Test Suite">
-            <directory suffix="Test.php">./tests</directory>
+        <testsuite name="Zoho Unit Test Suite">
+            <directory suffix=".php">./tests</directory>
         </testsuite>
     </testsuites>
     <php>

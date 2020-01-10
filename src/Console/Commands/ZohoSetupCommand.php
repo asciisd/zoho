@@ -5,9 +5,8 @@ namespace Asciisd\Zoho\Console\Commands;
 use Asciisd\Zoho\RestClient;
 use Illuminate\Console\Command;
 use zcrmsdk\oauth\exception\ZohoOAuthException;
-use zcrmsdk\oauth\ZohoOAuth;
 
-class SetupCommand extends Command
+class ZohoSetupCommand extends Command
 {
     /**
      * The name and signature of the console command.

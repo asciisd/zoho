@@ -2,9 +2,10 @@
 
 namespace Asciisd\Zoho\Providers;
 
-use Asciisd\Zoho\Console\Commands\InstallCommand;
-use Asciisd\Zoho\Console\Commands\SetupCommand;
+use Asciisd\Zoho\Console\Commands\ZohoSetupCommand;
+use Asciisd\Zoho\RestClient;
 use Illuminate\Support\ServiceProvider;
+use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
 class ZohoServiceProvider extends ServiceProvider
 {
@@ -43,7 +44,7 @@ class ZohoServiceProvider extends ServiceProvider
     private function publishOauth()
     {
         $this->publishes([
-            __DIR__ . '/Storage/oauth' => storage_path('app/zoho/oauth'),
+            __DIR__ . '/../Storage/oauth' => storage_path('app/zoho/oauth'),
         ], 'zoho-oauth');
     }
 
@@ -88,14 +89,31 @@ class ZohoServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                InstallCommand::class,
-                SetupCommand::class,
+                ZohoSetupCommand::class,
             ]);
         }
     }
 
     private function registerSingleton()
     {
-        //
+        $this->app->singleton('zoho', function ($app) {
+            $configuration = [
+                'client_id' => config('zoho.client_id'),
+                'client_secret' => config('zoho.client_secret'),
+                'redirect_uri' => config('zoho.redirect_uri'),
+                'currentUserEmail' => 'it@caveo-kw.com',
+                'applicationLogFilePath' => config('zoho.application_log_file_path'),
+                'token_persistence_path' => config('zoho.token_persistence_path'),
+                'accounts_url' => config('zoho.accounts_url'),
+                'sandbox' => config('zoho.sandbox'),
+                'apiBaseUrl' => config('zoho.api_base_url'),
+                'apiVersion' => config('zoho.api_version'),
+                'access_type' => config('zoho.access_type'),
+                'persistence_handler_class' => config('zoho.persistence_handler_class'),
+            ];
+
+            ZCRMRestClient::initialize($configuration);
+            return new RestClient(ZCRMRestClient::getInstance());
+        });
     }
 }
