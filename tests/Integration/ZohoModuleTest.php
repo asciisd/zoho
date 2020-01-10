@@ -2,26 +2,28 @@
 
 namespace Tests\Feature;
 
-use Asciisd\Zoho\Facades\Zoho;
 use Asciisd\Zoho\Tests\Integration\IntegrationTestCase;
 use zcrmsdk\crm\crud\ZCRMModule;
 use zcrmsdk\crm\crud\ZCRMRecord;
 
 class ZohoModuleTest extends IntegrationTestCase
 {
+
+    private $client;
     private $module;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->module = Zoho::useModule('leads');
+        $this->client = $this->getClient();
+        $this->module = $this->client->useModule('leads');
     }
 
     /** @test */
     public function it_can_get_all_modules()
     {
-        $leads = $this->module->getAllModules();
+        $leads = $this->client->getAllModules();
 
         self::assertInstanceOf(ZCRMModule::class, $leads[0]);
     }
@@ -29,7 +31,7 @@ class ZohoModuleTest extends IntegrationTestCase
     /** @test */
     public function is_can_get_module_by_name()
     {
-        $leads = $this->module->getModule();
+        $leads = $this->client->getModule();
 
         self::assertInstanceOf(ZCRMModule::class, $leads);
     }

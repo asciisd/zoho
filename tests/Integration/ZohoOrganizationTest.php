@@ -2,20 +2,20 @@
 
 namespace Tests\Feature;
 
-use Asciisd\Zoho\Facades\Zoho;
 use Asciisd\Zoho\Tests\Integration\IntegrationTestCase;
-use zcrmsdk\crm\exception\ZCRMException;
 use zcrmsdk\crm\setup\org\ZCRMOrganization;
 
 class ZohoOrganizationTest extends IntegrationTestCase
 {
+    private $client;
     private $org;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->org = Zoho::currentOrg();
+        $this->client = $this->getClient();
+        $this->org = $this->client->currentOrg();
     }
 
     /** @test */
@@ -23,18 +23,14 @@ class ZohoOrganizationTest extends IntegrationTestCase
     {
         $organization = $this->org->getOrganizationInstance();
 
-        dump($organization);
-
         self::assertInstanceOf(ZCRMOrganization::class, $organization);
     }
 
     /** @test */
     public function it_can_get_organization_details()
     {
-        $this->expectException(ZCRMException::class);
-
         $organization = $this->org->getOrganizationDetails();
 
-//        self::assertInstanceOf(ZCRMOrganization::class, $organization);
+        self::assertInstanceOf(ZCRMOrganization::class, $organization);
     }
 }
