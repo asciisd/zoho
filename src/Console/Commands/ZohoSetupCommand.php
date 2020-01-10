@@ -2,9 +2,8 @@
 
 namespace Asciisd\Zoho\Console\Commands;
 
-use Asciisd\Zoho\RestClient;
+use Asciisd\Zoho\Facades\Zoho;
 use Illuminate\Console\Command;
-use zcrmsdk\oauth\exception\ZohoOAuthException;
 
 class ZohoSetupCommand extends Command
 {
@@ -35,11 +34,10 @@ class ZohoSetupCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param RestClient $client
+     * @param Zoho $client
      * @return mixed
-     * @throws ZohoOAuthException
      */
-    public function handle(RestClient $client)
+    public function handle(Zoho $client)
     {
         $grantToken = $this->ask('Please enter your Grant Token');
         if (!$grantToken) {
