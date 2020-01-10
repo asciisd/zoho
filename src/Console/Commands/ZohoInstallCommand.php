@@ -1,18 +1,18 @@
 <?php
 
+
 namespace Asciisd\Zoho\Console\Commands;
 
-use Asciisd\Zoho\Facades\Zoho;
 use Illuminate\Console\Command;
 
-class ZohoSetupCommand extends Command
+class ZohoInstallCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'zoho:grant {token: : generate grant token from https://accounts.zoho.com/developerconsole}';
+    protected $signature = 'zoho:install';
 
     /**
      * The console command description.
@@ -38,15 +38,12 @@ class ZohoSetupCommand extends Command
      */
     public function handle()
     {
-        $grantToken = $this->argument('token');
+        $this->comment('Publishing Zoho OAuth files ...');
+        $this->callSilent('provider:publish', ['--tag' => 'zoho-oauth']);
 
-        if (!$grantToken) {
-            $this->error('The Grant Token is required.');
-            return;
-        }
+        $this->comment('Publishing Zoho Configuration ...');
+        $this->callSilent('provider:publish', ['--tag' => 'zoho-config']);
 
-        Zoho::generateAccessToken($grantToken);
-
-        $this->info('Zoho CRM has been set up successfully.');
+        $this->info('Zoho scaffolding installed successfully.');
     }
 }

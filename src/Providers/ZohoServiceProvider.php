@@ -2,6 +2,7 @@
 
 namespace Asciisd\Zoho\Providers;
 
+use Asciisd\Zoho\Console\Commands\ZohoInstallCommand;
 use Asciisd\Zoho\Console\Commands\ZohoSetupCommand;
 use Asciisd\Zoho\RestClient;
 use Illuminate\Support\ServiceProvider;
@@ -89,6 +90,7 @@ class ZohoServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                ZohoInstallCommand::class,
                 ZohoSetupCommand::class,
             ]);
         }
