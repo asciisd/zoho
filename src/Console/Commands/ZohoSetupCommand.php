@@ -12,7 +12,7 @@ class ZohoSetupCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'zoho:grant {token: : generate grant token from https://accounts.zoho.com/developerconsole}';
+    protected $signature = 'zoho:grant {token: generate grant token from https://accounts.zoho.com/developerconsole}';
 
     /**
      * The console command description.
