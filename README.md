@@ -33,7 +33,7 @@ $ php artisan zoho:install
 
 You'll need to add the following variables to your .env file. Use the credentials previously obtained registering your application.
 
-```php
+```dotenv
 ZOHO_CLIENT_ID=
 ZOHO_CLIENT_SECRET=
 ZOHO_REDIRECT_URI=
@@ -44,7 +44,7 @@ Then, follow the next steps:
 1. Go to [Zoho CRM Developer Console](https://accounts.zoho.com/developerconsole).
 2. Under the Client previously registered, click the vertical three points then `Self Client`.
 3. Enter the default scope , then click `View Code`
-```
+```text
 aaaserver.profile.READ,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL
 ```    
 > If you want to apply a different scope, see the [link](https://www.zoho.com/crm//developer/docs/api/oauth-overview.html#scopes)
@@ -54,12 +54,32 @@ aaaserver.profile.READ,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL
 Finally, run the following command:
 
 ```bash
-$ php artisan zoho:setup
+$ php artisan zoho:grant {generated_grant_token}
 ```
 
 Enter the previously generated code.
 
 **Zoho CRM is ready to use.**
+
+## Testing
+
+before testing make sure to create file ZCRMClientLibrary.log on 
+```text
+tests/Fixture/Storage/oauth/logs/ZCRMClientLibrary.log
+```
+
+and put your zcrm_oauthtokens.txt on 
+```text
+tests/Fixture/Storage/oauth/tokens/zcrm_oauthtokens.txt
+```
+
+finally put your Env keys
+```dotenv
+ZOHO_CLIENT_ID=
+ZOHO_CLIENT_SECRET=
+ZOHO_REDIRECT_URI=
+ZOHO_CURRENT_USER_EMAIL=
+```
 
 ## License
 
