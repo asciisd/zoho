@@ -19,7 +19,7 @@ class ZohoInstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Setup zoho credentials';
+    protected $description = 'Install Zoho resources';
 
     /**
      * Create a new command instance.
