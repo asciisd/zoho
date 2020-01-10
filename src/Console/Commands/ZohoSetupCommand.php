@@ -34,10 +34,9 @@ class ZohoSetupCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param Zoho $client
      * @return mixed
      */
-    public function handle(Zoho $client)
+    public function handle()
     {
         $grantToken = $this->ask('Please enter your Grant Token');
         if (!$grantToken) {
@@ -45,7 +44,7 @@ class ZohoSetupCommand extends Command
             return;
         }
 
-        $client->generateAccessToken($grantToken);
+        Zoho::generateAccessToken($grantToken);
 
         $this->info('Zoho CRM has been set up successfully.');
     }
