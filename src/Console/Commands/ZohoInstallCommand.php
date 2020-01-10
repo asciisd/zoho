@@ -4,6 +4,7 @@
 namespace Asciisd\Zoho\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class ZohoInstallCommand extends Command
 {
@@ -38,8 +39,9 @@ class ZohoInstallCommand extends Command
      */
     public function handle()
     {
-        $this->comment('Publishing Zoho OAuth files ...');
-        $this->callSilent('vendor:publish', ['--tag' => 'zoho-oauth']);
+        $this->comment('Generate Zoho OAuth files ...');
+        Storage::disk('local')->put('oauth/logs/ZCRMClientLibrary.log', '');
+        Storage::disk('local')->put('oauth/tokens/zcrm_oauthtokens.txt', '');
 
         $this->comment('Publishing Zoho Configuration ...');
         $this->callSilent('vendor:publish', ['--tag' => 'zoho-config']);
