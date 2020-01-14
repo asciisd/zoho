@@ -47,7 +47,7 @@ return [
     | description
     |
     */
-    'application_log_file_path' => storage_path('app/zoho/oauth/logs'),
+    'application_log_file_path' => storage_path('zoho/oauth/logs'),
     /*
     |--------------------------------------------------------------------------
     | title
@@ -56,7 +56,7 @@ return [
     | description
     |
     */
-    'token_persistence_path' => storage_path('app/zoho/oauth/tokens'),
+    'token_persistence_path' => storage_path('zoho/oauth/tokens'),
     /*
     |--------------------------------------------------------------------------
     | title

@@ -45,7 +45,7 @@ class ZohoServiceProvider extends ServiceProvider
     private function publishOauth()
     {
         $this->publishes([
-            __DIR__ . '/../Storage/oauth' => storage_path('app/zoho/oauth'),
+            __DIR__ . '/../Storage/oauth' => storage_path('zoho/oauth'),
         ], 'zoho-oauth');
     }
 
