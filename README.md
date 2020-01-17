@@ -81,6 +81,70 @@ ZOHO_REDIRECT_URI=
 ZOHO_CURRENT_USER_EMAIL=
 ```
 
+# How to use
+use **ZOHO** Facade like this
+```php
+// we can now deals with leads module
+$leads = Zoho::useModule('Leads');
+```
+
+this will return an instance of **ZohoModules**
+
+## CRUD Can be used like this:-
+
+**READ**
+
+```php
+// we can now deals with leads module
+$leads = Zoho::useModule('Leads');
+
+// find record by it's ID
+$lead = $leads->getRecord('3582074000002383003');
+```
+
+**UPDATE**
+
+```php
+// find record by it's ID
+$lead = $leads->getRecord('3582074000002383003');
+
+// Set field with new value
+$lead->setFieldValue('Last_Name', 'Ahmed');
+
+// Then call update() method
+$lead = $lead->update()->getData();
+
+and that's it
+```
+
+**CREATE**
+
+```php
+// initiating a new empty instance of leads
+$record = $leads->getRecordInstance();
+
+// fill this instance with data
+$record->setFieldValue('First_Name', 'Amr');
+$record->setFieldValue('Last_Name', 'Emad');
+$record->setFieldValue('Email', 'test@asciisd.com');
+$record->setFieldValue('Phone', '012345678910');
+
+// create the record into zoho crm then get the created instance data
+$lead = $record->create()->getData();
+
+```
+
+**DELETE**
+```php
+// find record by it's ID
+$lead = $leads->getRecord('3582074000002383003');
+
+$lead->delete();
+
+```
+
+
+
 ## License
 
 [MIT License](https://opensource.org/licenses/MIT). Copyright (c) 2020, Asciisd
