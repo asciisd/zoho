@@ -103,7 +103,7 @@ class ZohoServiceProvider extends ServiceProvider
                 'client_id' => config('zoho.client_id'),
                 'client_secret' => config('zoho.client_secret'),
                 'redirect_uri' => config('zoho.redirect_uri'),
-                'currentUserEmail' => 'it@caveo-kw.com',
+                'currentUserEmail' => config('zoho.current_user_email'),
                 'applicationLogFilePath' => config('zoho.application_log_file_path'),
                 'token_persistence_path' => config('zoho.token_persistence_path'),
                 'accounts_url' => config('zoho.accounts_url'),
