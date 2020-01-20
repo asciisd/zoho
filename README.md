@@ -143,6 +143,24 @@ $lead->delete();
 
 ```
 
+**SEARCH**
+
+you can search by word
+```php
+// get module records
+$records = Zoho::useModule('Trading_Accounts')->searchRecordsByWord('word to be searched');
+$first_record = $records[0];
+
+//OR
+$records = Zoho::useModule('Trading_Accounts')->searchRecordsByPhone('phone number');
+$first_record = $records[0];
+
+//OR
+$records = Zoho::useModule('Trading_Accounts')->searchRecordsByEmail('email address');
+$first_record = $records[0];
+
+```
+
 
 
 ## License
