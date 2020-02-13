@@ -1,3 +1,11 @@
+# Zoho
+
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Total Downloads][ico-downloads]][link-downloads]
+
+This package used to integrate with the new Zoho CRM
+
 ## Requirements
 
 * Get yourself a [Zoho CRM account](https://www.zoho.com/crm/).
@@ -191,3 +199,16 @@ Contact:<br>
 [asciisd.com](https://asciisd.com)<br>
 aemad@asciisd.com<br>
 +2-010-1144-1444
+
+[ico-version]: https://img.shields.io/packagist/v/asciisd/zoho.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/asciisd/zoho.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/asciisd/zoho.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/asciisd/zoho.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/asciisd/zoho
+[link-scrutinizer]: https://scrutinizer-ci.com/g/asciisd/zoho/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/asciisd/zoho
+[link-downloads]: https://packagist.org/packages/asciisd/zoho
+[link-author]: https://github.com/asciisd
+[link-contributors]: ../../contributors
