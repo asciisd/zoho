@@ -95,6 +95,33 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
+    public function it_can_search_by_criteria() {
+        $records = $this->module->searchRecordsByCriteria("(City:equals:Al Wasitah) and (State:equals:Al Fayyum)");
+
+        self::assertInstanceOf(ZCRMRecord::class, $records[0]);
+        self::assertEquals('falah.alhajeri6999@hotmail.com', $records[0]->getFieldValue('Email'));
+    }
+
+    /** @test */
+    public function it_can_search_by_field_name() {
+        $records = $this->module->where('City', 'Al Wasitah')->search();
+
+        self::assertInstanceOf(ZCRMRecord::class, $records[0]);
+        self::assertEquals('falah.alhajeri6999@hotmail.com', $records[0]->getFieldValue('Email'));
+    }
+
+    /** @test */
+    public function it_can_search_with_multiple_criteria() {
+        $records = $this->module
+            ->where('City', 'Al Wasitah')
+            ->andWhere('State', 'Al Fayyum')
+            ->search();
+
+        self::assertInstanceOf(ZCRMRecord::class, $records[0]);
+        self::assertEquals('falah.alhajeri6999@hotmail.com', $records[0]->getFieldValue('Email'));
+    }
+
+    /** @test */
     public function it_can_create_new_record()
     {
         $lead = $this->module->getRecordInstance();

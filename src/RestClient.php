@@ -1,19 +1,20 @@
 <?php
 
-
 namespace Asciisd\Zoho;
 
-
-use Asciisd\Zoho\Traits\ZohoModules;
-use Asciisd\Zoho\Traits\ZohoOrganization;
 use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 use zcrmsdk\oauth\exception\ZohoOAuthException;
 use zcrmsdk\oauth\ZohoOAuth;
 
+/**
+ * Class RestClient
+ *
+ *
+ *
+ * @package Asciisd\Zoho
+ */
 class RestClient
 {
-    use ZohoModules, ZohoOrganization;
-
     protected $rest;
 
     /**
@@ -24,6 +25,16 @@ class RestClient
     public function __construct($rest)
     {
         $this->rest = $rest;
+    }
+
+    public function useModule($module_api_name = 'leads')
+    {
+        return new ZohoModule($this->rest, $module_api_name);
+    }
+
+    public function currentOrg()
+    {
+        return new ZohoOrganization($this->rest);
     }
 
     /**

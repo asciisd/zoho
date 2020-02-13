@@ -1,18 +1,24 @@
 <?php
 
 
-namespace Asciisd\Zoho\Traits;
+namespace Asciisd\Zoho;
 
 
 use zcrmsdk\crm\setup\org\ZCRMOrganization;
+use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 use zcrmsdk\crm\setup\users\ZCRMUser;
 
-trait ZohoOrganization
+class ZohoOrganization
 {
+    protected $rest;
 
-    public function currentOrg()
+    /**
+     * ZohoOrganization constructor.
+     * @param ZCRMRestClient $rest
+     */
+    public function __construct($rest)
     {
-        return $this;
+        $this->rest = $rest;
     }
 
     /**

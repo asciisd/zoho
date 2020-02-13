@@ -84,6 +84,8 @@ ZOHO_CURRENT_USER_EMAIL=
 # How to use
 use **ZOHO** Facade like this
 ```php
+use Asciisd\Zoho\Facades\Zoho;
+
 // we can now deals with leads module
 $leads = Zoho::useModule('Leads');
 ```
@@ -92,9 +94,11 @@ this will return an instance of **ZohoModules**
 
 ## CRUD Can be used like this:-
 
-**READ**
+#### READ
 
 ```php
+use Asciisd\Zoho\Facades\Zoho;
+
 // we can now deals with leads module
 $leads = Zoho::useModule('Leads');
 
@@ -102,7 +106,7 @@ $leads = Zoho::useModule('Leads');
 $lead = $leads->getRecord('3582074000002383003');
 ```
 
-**UPDATE**
+#### UPDATE
 
 ```php
 // find record by it's ID
@@ -113,11 +117,9 @@ $lead->setFieldValue('Last_Name', 'Ahmed');
 
 // Then call update() method
 $lead = $lead->update()->getData();
-
-and that's it
 ```
 
-**CREATE**
+#### CREATE
 
 ```php
 // initiating a new empty instance of leads
@@ -134,33 +136,49 @@ $lead = $record->create()->getData();
 
 ```
 
-**DELETE**
+#### DELETE
 ```php
 // find record by it's ID
 $lead = $leads->getRecord('3582074000002383003');
 
 $lead->delete();
-
 ```
 
-**SEARCH**
+#### SEARCH
 
-you can search by word
+##### Word
 ```php
-// get module records
 $records = Zoho::useModule('Trading_Accounts')->searchRecordsByWord('word to be searched');
 $first_record = $records[0];
-
-//OR
-$records = Zoho::useModule('Trading_Accounts')->searchRecordsByPhone('phone number');
-$first_record = $records[0];
-
-//OR
-$records = Zoho::useModule('Trading_Accounts')->searchRecordsByEmail('email address');
-$first_record = $records[0];
-
 ```
 
+##### Phone
+```php
+$records = Zoho::useModule('Trading_Accounts')->searchRecordsByPhone('12345678910');
+$first_record = $records[0];
+```
+
+##### Email
+```php
+$records = Zoho::useModule('Trading_Accounts')->searchRecordsByEmail('nobody@asciisd.com');
+$first_record = $records[0];
+```
+
+##### Criteria
+```php
+$records = Zoho::useModule('Trading_Accounts')->searchRecordsByCriteria('(City:equals:NY) and (State:equals:Alden)');
+$first_record = $records[0];
+```
+
+##### Custom
+```php
+$records = Zoho::useModule('Trading_Accounts')
+                    ->where('City', 'NY')
+                    ->andWhere('State','Alden')
+                    ->search();
+
+$first_record = $records[0];
+```
 
 
 ## License
