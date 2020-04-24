@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Facade;
  *
  * @package App\Facades
  */
-class Zoho extends Facade
+class ZohoManager extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'zoho';
+        return 'zoho_manager';
     }
 }

@@ -2,9 +2,12 @@
 
 namespace Asciisd\Zoho\Providers;
 
+use Asciisd\Zoho\Console\Commands\ZohoAuthentication;
 use Asciisd\Zoho\Console\Commands\ZohoInstallCommand;
 use Asciisd\Zoho\Console\Commands\ZohoSetupCommand;
 use Asciisd\Zoho\RestClient;
+use Asciisd\Zoho\Zoho;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
@@ -17,9 +20,14 @@ class ZohoServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishConfig();
-        $this->publishOauth();
-        $this->publishCommands();
+        $this->registerRoutes();
+//        $this->registerResources();
+        $this->registerMigrations();
+        $this->registerPublishing();
+
+        ZCRMRestClient::initialize(
+            Zoho::zohoOptions()
+        );
     }
 
     /**
@@ -29,92 +37,117 @@ class ZohoServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->configure();
+        $this->registerCommands();
+        $this->registerSingleton();
+
+        if (!class_exists('Zoho')) {
+            class_alias('Asciisd\Zoho\Zoho', 'Zoho');
+        }
+    }
+
+    /**
+     * Register the package routes.
+     *
+     * @return void
+     */
+    protected function registerRoutes()
+    {
+        if (Zoho::$registersRoutes) {
+            Route::group([
+                'prefix' => config('zoho.path'),
+                'namespace' => 'Asciisd\Zoho\Http\Controllers',
+                'as' => 'zoho.',
+            ], function () {
+                $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
+            });
+        }
+    }
+
+    /**
+     * Register the package resources.
+     *
+     * @return void
+     */
+    protected function registerResources()
+    {
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../../resources/lang');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'zoho');
+    }
+
+    /**
+     * Register the package migrations.
+     *
+     * @return void
+     */
+    protected function registerMigrations()
+    {
+        if (Zoho::$runsMigrations && $this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        }
+    }
+
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
+    protected function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../../config/zoho.php' => $this->app->configPath('zoho.php'),
+            ], 'zoho-config');
+
+//            $this->publishes([
+//                __DIR__ . '/../../database/migrations' => $this->app->databasePath('migrations'),
+//            ], 'zoho-migrations');
+//
+//            $this->publishes([
+//                __DIR__ . '/../../resources/views' => $this->app->resourcePath('views/vendor/zoho'),
+//            ], 'zoho-views');
+//
+//            $this->publishes([
+//                __DIR__ . '/../../public' => public_path('vendor/zoho'),
+//            ], 'zoho-assets');
+
+            $this->publishes([
+                __DIR__ . '/../Storage/oauth' => storage_path('zoho/oauth'),
+            ], 'zoho-oauth');
+
+            // use if you want to use application service provider
+//            $this->publishes([
+//                __DIR__ . '/../../stubs/ZohoServiceProvider.stub' => app_path('Providers/ZohoServiceProvider.php'),
+//            ], 'zoho-provider');
+        }
+    }
+
+    /**
+     * Setup the configuration for Zoho.
+     *
+     * @return void
+     */
+    protected function configure()
+    {
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/zoho.php', 'zoho'
         );
-        $this->registerSingleton();
     }
 
-    private function publishConfig()
-    {
-        $this->publishes([
-            __DIR__ . '/../../config/zoho.php' => config_path('zoho.php'),
-        ], 'zoho-config');
-    }
-
-    private function publishOauth()
-    {
-        $this->publishes([
-            __DIR__ . '/../Storage/oauth' => storage_path('zoho/oauth'),
-        ], 'zoho-oauth');
-    }
-
-    private function publishAssets()
-    {
-        // $this->publishes([
-        //     __DIR__.'/../../public' => public_path('vendor/zoho'),
-        // ], 'public');
-    }
-
-    private function publishRoutes()
-    {
-        // $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
-    }
-
-    private function publishTranslations()
-    {
-        // $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'zoho');
-        // $this->loadJsonTranslationsFrom(__DIR__.'/../../resources/lang', 'zoho');
-        // $this->publishes([
-        //     __DIR__.'/../../resources/lang' => resource_path('lang/vendor/zoho'),
-        // ], 'translations');
-    }
-
-    private function publishViews()
-    {
-        // $this->loadViewsFrom(__DIR__.'/../../resources/views', 'zoho');
-        // $this->publishes([
-        //     __DIR__.'/../../resources/views' => resource_path('views/vendor/zoho'),
-        // ], 'views');
-    }
-
-    private function publishMigrations()
-    {
-        // $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-        // $this->publishes([
-        //     __DIR__.'/../../database/migrations/' => database_path('migrations')
-        // ], 'migrations');
-    }
-
-    private function publishCommands()
+    private function registerCommands()
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ZohoInstallCommand::class,
                 ZohoSetupCommand::class,
+                ZohoAuthentication::class
             ]);
         }
     }
 
     private function registerSingleton()
     {
-        $this->app->singleton('zoho', function ($app) {
-            $configuration = [
-                'client_id' => config('zoho.client_id'),
-                'client_secret' => config('zoho.client_secret'),
-                'redirect_uri' => config('zoho.redirect_uri'),
-                'currentUserEmail' => config('zoho.current_user_email'),
-                'applicationLogFilePath' => config('zoho.application_log_file_path'),
-                'token_persistence_path' => config('zoho.token_persistence_path'),
-                'accounts_url' => config('zoho.accounts_url'),
-                'sandbox' => config('zoho.sandbox'),
-                'apiBaseUrl' => config('zoho.api_base_url'),
-                'apiVersion' => config('zoho.api_version'),
-                'access_type' => config('zoho.access_type'),
-                'persistence_handler_class' => config('zoho.persistence_handler_class'),
-            ];
-
-            ZCRMRestClient::initialize($configuration);
+        $this->app->singleton('zoho_manager', function ($app) {
             return new RestClient(ZCRMRestClient::getInstance());
         });
     }

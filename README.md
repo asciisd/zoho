@@ -50,24 +50,17 @@ ZOHO_CURRENT_USER_EMAIL=
 
 Then, follow the next steps:
 1. Go to [Zoho CRM Developer Console](https://accounts.zoho.com/developerconsole).
-2. Under the Client previously registered, click the vertical three points then `Self Client`.
-3. Enter the default scope , then click `View Code`
-```text
-aaaserver.profile.READ,ZohoCRM.modules.ALL,ZohoCRM.settings.ALL
-```    
-> If you want to apply a different scope, see the [link](https://www.zoho.com/crm//developer/docs/api/oauth-overview.html#scopes)
+2. ADD CLIENT `Server-based Applications`.
+3. Enter Client Name `Any name you want`
+4. Enter Homepage URL `your base home url`
+5. Enter Authorized Redirect URIs `config('app.url') . /zoho/oauth2callback`
+6. Go to your project location on terminal and enter
+    ```bash
+    php artisan zoho:authenticate
+    ```
+7. Copy the generated link and past it in the browser to complete the oAuth process.
 
-4. Copy the generated code.
-
-Finally, run the following command:
-
-```bash
-$ php artisan zoho:grant {generated_grant_token}
-```
-
-Enter the previously generated code.
-
-**Zoho CRM is ready to use.**
+**Now Zoho CRM is ready to use.**
 
 ## Testing
 
@@ -92,10 +85,10 @@ ZOHO_CURRENT_USER_EMAIL=
 # How to use
 use **ZOHO** Facade like this
 ```php
-use Asciisd\Zoho\Facades\Zoho;
+use Asciisd\Zoho\Facades\ZohoManager;
 
 // we can now deals with leads module
-$leads = Zoho::useModule('Leads');
+$leads = ZohoManager::useModule('Leads');
 ```
 
 this will return an instance of **ZohoModules**
@@ -105,10 +98,10 @@ this will return an instance of **ZohoModules**
 #### READ
 
 ```php
-use Asciisd\Zoho\Facades\Zoho;
+use Asciisd\Zoho\Facades\ZohoManager;
 
 // we can now deals with leads module
-$leads = Zoho::useModule('Leads');
+$leads = ZohoManager::useModule('Leads');
 
 // find record by it's ID
 $lead = $leads->getRecord('3582074000002383003');
@@ -156,31 +149,41 @@ $lead->delete();
 
 ##### Word
 ```php
-$records = Zoho::useModule('Trading_Accounts')->searchRecordsByWord('word to be searched');
+use Asciisd\Zoho\Facades\ZohoManager;
+
+$records = ZohoManager::useModule('Leads')->searchRecordsByWord('word to be searched');
 $first_record = $records[0];
 ```
 
 ##### Phone
 ```php
-$records = Zoho::useModule('Trading_Accounts')->searchRecordsByPhone('12345678910');
+use Asciisd\Zoho\Facades\ZohoManager;
+
+$records = ZohoManager::useModule('Leads')->searchRecordsByPhone('12345678910');
 $first_record = $records[0];
 ```
 
 ##### Email
 ```php
-$records = Zoho::useModule('Trading_Accounts')->searchRecordsByEmail('nobody@asciisd.com');
+use Asciisd\Zoho\Facades\ZohoManager;
+
+$records = ZohoManager::useModule('Leads')->searchRecordsByEmail('nobody@asciisd.com');
 $first_record = $records[0];
 ```
 
 ##### Criteria
 ```php
-$records = Zoho::useModule('Trading_Accounts')->searchRecordsByCriteria('(City:equals:NY) and (State:equals:Alden)');
+use Asciisd\Zoho\Facades\ZohoManager;
+
+$records = ZohoManager::useModule('Leads')->searchRecordsByCriteria('(City:equals:NY) and (State:equals:Alden)');
 $first_record = $records[0];
 ```
 
 ##### Custom
 ```php
-$records = Zoho::useModule('Trading_Accounts')
+use Asciisd\Zoho\Facades\ZohoManager;
+
+$records = ZohoManager::useModule('Leads')
                     ->where('City', 'NY')
                     ->andWhere('State','Alden')
                     ->search();

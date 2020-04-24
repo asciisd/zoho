@@ -1,32 +1,34 @@
 {
   "name": "asciisd/zoho",
-  "description": "",
-  "keywords": [
-    "Laravel",
-    "zoho",
-    "crm"
-  ],
+  "description": "Asciisd Zoho provide an elegant and easy way to communicate with Zoho CRM.",
+  "keywords": ["Laravel", "zoho", "crm"],
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/asciisd/zoho/issues",
+    "source": "https://github.com/asciisd/zoho"
+  },
   "authors": [
     {
       "name": "Amr Ahmed",
       "email": "aemad@asciisd.com"
     }
   ],
-  "homepage": "https://github.com/asciisd/zoho",
   "require": {
-    "php": "^7.1.3",
-    "illuminate/support": "~5.8.0|^6.0|^7.0",
+    "php": "^7.2",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^6.5",
+    "illuminate/support": "^6.0|^7.0",
+    "nesbot/carbon": "^2.0",
     "zohocrm/php-sdk": "^2.0"
   },
   "require-dev": {
     "mockery/mockery": "^1.0",
-    "orchestra/testbench": "^3.8|^4.0|^5.0",
-    "phpunit/phpunit": "^7.5|^8.0"
+    "orchestra/testbench": "^4.0|^5.0",
+    "phpunit/phpunit": "^8.0|^9.0"
   },
   "suggest": {
     "ext-intl": "Allows for more locales besides the default \"en\" when formatting money values."
   },
-  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Asciisd\\Zoho\\": "src/"
@@ -48,6 +50,9 @@
     "test": "vendor/bin/phpunit -c ./phpunit.xml --colors=always",
     "analysis": "vendor/bin/phpstan analyse"
   },
+  "config": {
+    "sort-packages": true
+  },
   "minimum-stability": "dev",
-  "prefer-stable": false
+  "prefer-stable": true
 }

@@ -181,7 +181,7 @@ class ZohoModule
     public function search($page = 1, $perPage = 200)
     {
         if ($this->criteria !== "") {
-            return $this->searchRecordsByCriteria($this->criteria);
+            return $this->searchRecordsByCriteria($this->criteria, $page, $perPage);
         }
 
         return null;

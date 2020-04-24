@@ -1,10 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| zoho Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register routes for your package.
-|
-*/
+use Illuminate\Support\Facades\Route;
+
+Route::get('oauth2callback', 'ZohoController@oauth2callback');

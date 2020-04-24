@@ -2,7 +2,7 @@
 
 namespace Asciisd\Zoho\Console\Commands;
 
-use Asciisd\Zoho\Facades\Zoho;
+use Asciisd\Zoho\Facades\ZohoManager;
 use Illuminate\Console\Command;
 
 class ZohoSetupCommand extends Command
@@ -20,7 +20,7 @@ class ZohoSetupCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Setup zoho credentials';
+    protected $description = 'Setup zoho credentials in case you used Self-Client OAuth method';
 
     /**
      * Create a new command instance.
@@ -46,7 +46,7 @@ class ZohoSetupCommand extends Command
             return;
         }
 
-        Zoho::generateAccessToken($grantToken);
+        ZohoManager::generateAccessToken($grantToken);
 
         $this->info('Zoho CRM has been set up successfully.');
     }
