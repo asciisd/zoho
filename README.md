@@ -9,8 +9,8 @@ This package used to integrate with the new Zoho CRM
 ## Requirements
 
 * Get yourself a [Zoho CRM account](https://www.zoho.com/crm/).
-* [Register your application](https://www.zoho.com/crm/developer/docs/php-sdk/clientapp.html)
-* PHP >= 5.6.4
+* [Register your application](https://www.zoho.com/crm/developer/docs/api/register-client.html)
+* PHP >= 7.2
 * Laravel >= 6.*
 
 ## Installation
@@ -25,15 +25,15 @@ Or add it to `composer.json` manually:
 
 ```json
 "require": {
-    "asciisd/zoho": "0.0.1"
+    "asciisd/zoho": "^1.0"
 }
 ```
 
-Zoho CRM's service providers will be automatically registered using Laravel's auto-discovery feature.
+Zoho CRM service providers will be automatically registered using Laravel's auto-discovery feature.
 
 ## Configuration
 
-The defaults configuration settings are set in `config/zoho.php`. Copy this file to your own config directory to modify the values. You can publish the config using this command:
+The default configuration settings set in `config/zoho.php`. Copy this file to your own config directory to modify the values. You can publish the config using this command:
 
 ```bash
 $ php artisan zoho:install
