@@ -27,6 +27,11 @@ class RestClient
         $this->rest = $rest;
     }
 
+    public function getAllModules()
+    {
+        return $this->rest->getAllModules();
+    }
+
     public function useModule($module_api_name = 'leads')
     {
         return new ZohoModule($this->rest, $module_api_name);

@@ -31,7 +31,7 @@ class ZohoModuleTest extends IntegrationTestCase
     /** @test */
     public function is_can_get_module_by_name()
     {
-        $leads = $this->client->getModule();
+        $leads = $this->client->useModule();
 
         self::assertInstanceOf(ZCRMModule::class, $leads);
     }

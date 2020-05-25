@@ -24,10 +24,6 @@ class ZohoServiceProvider extends ServiceProvider
 //        $this->registerResources();
         $this->registerMigrations();
         $this->registerPublishing();
-
-        ZCRMRestClient::initialize(
-            Zoho::zohoOptions()
-        );
     }
 
     /**
@@ -147,6 +143,7 @@ class ZohoServiceProvider extends ServiceProvider
 
     private function registerSingleton()
     {
+        ZCRMRestClient::initialize(Zoho::zohoOptions());
         $this->app->singleton('zoho_manager', function ($app) {
             return new RestClient(ZCRMRestClient::getInstance());
         });
