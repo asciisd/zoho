@@ -56,7 +56,7 @@ Then, follow the next steps:
 5. Enter Authorized Redirect URIs `config('app.url') . /zoho/oauth2callback`
 6. Go to your project location on terminal and enter
     ```bash
-    php artisan zoho:authenticate
+    php artisan zoho:authentication
     ```
 7. Copy the generated link and past it in the browser to complete the oAuth process.
 
