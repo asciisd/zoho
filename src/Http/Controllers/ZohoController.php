@@ -14,7 +14,7 @@ class ZohoController extends Controller
     {
         ZCRMRestClient::initialize(Zoho::zohoOptions());
         $oAuthClient = ZohoOAuth::getClientInstance();
-        $$oAuthClient->generateAccessToken($request->code);
+        $oAuthClient->generateAccessToken($request->code);
 
         return 'Zoho CRM has been set up successfully.';
     }
