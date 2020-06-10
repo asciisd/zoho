@@ -20,7 +20,7 @@ abstract class IntegrationTestCase extends TestCase
             'applicationLogFilePath' => './tests/Fixture/Storage/oauth/logs',
             'token_persistence_path' => './tests/Fixture/Storage/oauth/tokens',
             'accounts_url' => 'https://accounts.zoho.com',
-            'sandbox' => false,
+            'sandbox' => true,
             'apiBaseUrl' => 'www.zohoapis.com',
             'apiVersion' => 'v2',
             'access_type' => 'offline',

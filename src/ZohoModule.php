@@ -11,7 +11,6 @@ class ZohoModule
     protected $rest;
     protected $module_api_name;
     protected $moduleIns;
-    protected $criteria = "";
     protected $operators = ['equals', 'starts_with'];
 
     /**
@@ -139,7 +138,7 @@ class ZohoModule
      * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
      * @return ZCRMRecord[]
      */
-    public function searchRecordsByCriteria($criteria = "", $page = 1, $perPage = 200)
+    public function searchRecordsByCriteria($criteria, $page = 1, $perPage = 200)
     {
         $param_map = ["page" => $page, "per_page" => $perPage];
         return $this->moduleIns->searchRecordsByCriteria($criteria, $param_map)->getData();
@@ -160,6 +159,23 @@ class ZohoModule
     }
 
     /**
+     * create record instance that contains the array keys and values
+     *
+     * @param array $args
+     * @return object
+     */
+    public function create($args = [])
+    {
+        $record = $this->getRecordInstance();
+
+        foreach ($args as $key => $value) {
+            $record->setFieldValue($key, $value);
+        }
+
+        return $record->create()->getData();
+    }
+
+    /**
      * update existing entities in the module.
      *
      * @param ZCRMRecord $record
@@ -174,52 +190,17 @@ class ZohoModule
     }
 
     /**
+     * @param CriteriaBuilder $builder
      * @param int $page //to get the list of records from the respective pages. Default value for page is 1.
      * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
      * @return ZCRMRecord[]
      */
-    public function search($page = 1, $perPage = 200)
+    public function search($builder, $page = 1, $perPage = 200)
     {
-        if ($this->criteria !== "") {
-            return $this->searchRecordsByCriteria($this->criteria, $page, $perPage);
+        if ($builder->toString() !== "") {
+            return $this->searchRecordsByCriteria($builder->toString(), $page, $perPage);
         }
 
         return null;
-    }
-
-    /**
-     * add criteria to the search
-     *
-     * @param $field
-     * @param $value
-     * @param string $operator
-     * @return $this
-     */
-    public function where($field, $value, $operator = 'equals')
-    {
-        $this->criteria = "";
-
-        $this->criteria .= $this->queryBuilder($field, $operator, $value);
-
-        return $this;
-    }
-
-    public function andWhere($field, $value, $operator = 'equals')
-    {
-        $this->criteria .= ' and ' . $this->queryBuilder($field, $operator, $value);
-
-        return $this;
-    }
-
-    public function orWhere($field, $value, $operator = 'equals')
-    {
-        $this->criteria .= ' or ' . $this->queryBuilder($field, $operator, $value);
-
-        return $this;
-    }
-
-    private function queryBuilder(...$args)
-    {
-        return "($args[0]:$args[1]:$args[2])";
     }
 }

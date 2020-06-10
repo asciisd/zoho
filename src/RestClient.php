@@ -29,7 +29,7 @@ class RestClient
 
     public function getAllModules()
     {
-        return $this->rest->getAllModules();
+        return $this->rest->getAllModules()->getData();
     }
 
     public function useModule($module_api_name = 'leads')

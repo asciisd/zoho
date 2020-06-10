@@ -95,10 +95,10 @@ class ZohoServiceProvider extends ServiceProvider
                 __DIR__ . '/../../config/zoho.php' => $this->app->configPath('zoho.php'),
             ], 'zoho-config');
 
-//            $this->publishes([
-//                __DIR__ . '/../../database/migrations' => $this->app->databasePath('migrations'),
-//            ], 'zoho-migrations');
-//
+            $this->publishes([
+                __DIR__ . '/../../database/migrations' => $this->app->databasePath('migrations'),
+            ], 'zoho-migrations');
+
 //            $this->publishes([
 //                __DIR__ . '/../../resources/views' => $this->app->resourcePath('views/vendor/zoho'),
 //            ], 'zoho-views');

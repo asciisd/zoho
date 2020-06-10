@@ -28,7 +28,7 @@ class ZohoOrganization
      */
     public function getOrganizationDetails()
     {
-        return $this->rest->getOrganizationDetails()->getData();
+        return $this->rest->getOrganizationInstance();
     }
 
     /**

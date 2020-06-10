@@ -1,14 +1,16 @@
 <?php
 
-namespace Tests\Feature;
+namespace Asciisd\Zoho\Tests\Integration;
 
-use Asciisd\Zoho\Tests\Integration\IntegrationTestCase;
+use Asciisd\Zoho\ZohoModule;
 use zcrmsdk\crm\crud\ZCRMModule;
 use zcrmsdk\crm\crud\ZCRMRecord;
+use zcrmsdk\crm\exception\ZCRMException;
 
 class ZohoModuleTest extends IntegrationTestCase
 {
 
+    const LEAD_ID_FOR_TEST = '3582074000000369003';
     private $client;
     private $module;
 
@@ -17,7 +19,7 @@ class ZohoModuleTest extends IntegrationTestCase
         parent::setUp();
 
         $this->client = $this->getClient();
-        $this->module = $this->client->useModule('leads');
+        $this->module = $this->client->useModule('Leads');
     }
 
     /** @test */
@@ -33,16 +35,16 @@ class ZohoModuleTest extends IntegrationTestCase
     {
         $leads = $this->client->useModule();
 
-        self::assertInstanceOf(ZCRMModule::class, $leads);
+        self::assertInstanceOf(ZohoModule::class, $leads);
     }
 
     /** @test */
     public function it_can_instantiate_a_record_with_id()
     {
-        $record = $this->module->getRecordInstance('3582074000005414003');
+        $record = $this->module->getRecordInstance(self::LEAD_ID_FOR_TEST);
         self::assertInstanceOf(ZCRMRecord::class, $record);
-        self::assertEquals($record->getModuleApiName(), 'leads');
-        self::assertEquals($record->getEntityId(), '3582074000005414003');
+        self::assertEquals('Leads', $record->getModuleApiName());
+        self::assertEquals(self::LEAD_ID_FOR_TEST, $record->getEntityId());
     }
 
     /** @test */
@@ -50,7 +52,7 @@ class ZohoModuleTest extends IntegrationTestCase
     {
         $module = $this->module->getModuleInstance();
         self::assertInstanceOf(ZCRMModule::class, $module);
-        self::assertEquals($module->getAPIName(), 'leads');
+        self::assertEquals('Leads', $module->getAPIName());
     }
 
     /** @test */
@@ -63,17 +65,17 @@ class ZohoModuleTest extends IntegrationTestCase
     /** @test */
     public function it_can_get_record_by_module_api_name_and_record_id()
     {
-        $record = $this->module->getRecord('3582074000005414003');
+        $record = $this->module->getRecord(self::LEAD_ID_FOR_TEST);
         self::assertInstanceOf(ZCRMRecord::class, $record);
     }
 
     /** @test */
     public function it_can_search_for_word_on_specific_module()
     {
-        $records = $this->module->searchRecordsByWord('mohamed');
+        $records = $this->module->searchRecordsByWord('Amr Ahmed');
 
-        self::assertInstanceOf(ZCRMRecord::class, $records[0]);
-        self::assertEquals('3582074000000655089', $records[0]->getOwner()->getId());
+        self::assertInstanceOf(ZCRMRecord::class, end($records));
+        self::assertEquals(self::LEAD_ID_FOR_TEST, end($records)->getEntityId());
     }
 
     /** @test */
@@ -95,7 +97,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_by_criteria() {
+    public function it_can_search_by_criteria()
+    {
         $records = $this->module->searchRecordsByCriteria("(City:equals:Al Wasitah) and (State:equals:Al Fayyum)");
 
         self::assertInstanceOf(ZCRMRecord::class, $records[0]);
@@ -103,7 +106,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_by_field_name() {
+    public function it_can_search_by_field_name()
+    {
         $records = $this->module->where('City', 'Al Wasitah')->search();
 
         self::assertInstanceOf(ZCRMRecord::class, $records[0]);
@@ -111,7 +115,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_with_multiple_criteria() {
+    public function it_can_search_with_multiple_criteria()
+    {
         $records = $this->module
             ->where('City', 'Al Wasitah')
             ->andWhere('State', 'Al Fayyum')
@@ -121,7 +126,9 @@ class ZohoModuleTest extends IntegrationTestCase
         self::assertEquals('falah.alhajeri6999@hotmail.com', $records[0]->getFieldValue('Email'));
     }
 
-    /** @test */
+    /** @test
+     * @throws ZCRMException
+     */
     public function it_can_create_new_record()
     {
         $lead = $this->module->getRecordInstance();
@@ -141,7 +148,9 @@ class ZohoModuleTest extends IntegrationTestCase
         $lead->delete();
     }
 
-    /** @test */
+    /** @test
+     * @throws ZCRMException
+     */
     public function it_can_update_records()
     {
         $lead = $this->module->getRecord('3582074000002383003');

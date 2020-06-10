@@ -1,21 +1,19 @@
 <?php
 
-namespace Tests\Feature;
+namespace Asciisd\Zoho\Tests\Integration;
 
-use Asciisd\Zoho\Tests\Integration\IntegrationTestCase;
 use zcrmsdk\crm\setup\org\ZCRMOrganization;
 
 class ZohoOrganizationTest extends IntegrationTestCase
 {
-    private $client;
     private $org;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->client = $this->getClient();
-        $this->org = $this->client->currentOrg();
+        $client = $this->getClient();
+        $this->org = $client->currentOrg();
     }
 
     /** @test */
