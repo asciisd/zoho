@@ -93,6 +93,53 @@ $leads = ZohoManager::useModule('Leads');
 
 this will return an instance of **ZohoModules**
 
+## Model Can be used like this:- 
+Available only starting from **v1.1.0**
+
+add `Zohoable` as extended class like this:-
+
+```php
+use Asciisd\Zoho\Zohoable;
+use Asciisd\Zoho\CriteriaBuilder;
+
+class Invoice extends Zohoable {
+    public function searchCriteria(){
+        // you should return string of criteria that you want to find current record in crm with.
+        //EX:
+        return CriteriaBuilder::where('PaymentID', $this->payment_id)
+                              ->andWhere('Order_ID', $this->order_id)
+                              ->toString();
+    }
+
+    public function zohoMandatoryFields() {
+        // you should return array of mandatory fields to create module from this model
+        // EX:
+        return ['Base_Currency' => $this->currency];
+    }
+}
+```
+
+so now you can use invoice like this
+
+```php
+$invoice = App\Invoice::find(1);
+
+// to check if has zoho id stored on local database or not
+$invoice->hasZohoId();
+
+// to return the stored zoho id
+$invoice->zohoId();
+
+// that will search on zoho with provided criteria to find the record and associated your model with returned id if exist
+// if you provided an `id` that will be used instead of searching on Zoho
+$invoice->createOrUpdateZohoId($id = null);
+
+// you can also send current model to zoho
+// that wil use `zohoMandatoryFields` method to Serialize model to zohoObject
+// Also you can pass additional fields as array to this method
+$invoice->createAsZohoable($options = []);
+```
+
 ## CRUD Can be used like this:-
 
 #### READ
@@ -190,7 +237,15 @@ $records = ZohoManager::useModule('Leads')
 
 $first_record = $records[0];
 ```
+you can also make CriteriaBuilder like this
 
+```php
+use Asciisd\Zoho\CriteriaBuilder;
+use Asciisd\Zoho\Facades\ZohoManager;
+
+$builder = CriteriaBuilder::where('City', 'NY')->andWhere('State','Alden')->startsWith('City', 'N');
+ZohoManager::useModule('Leads')->searchRecordsByCriteria($builder->toString());
+```
 
 ## License
 
