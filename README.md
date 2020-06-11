@@ -103,6 +103,10 @@ use Asciisd\Zoho\Zohoable;
 use Asciisd\Zoho\CriteriaBuilder;
 
 class Invoice extends Zohoable {
+    
+    // this is your Zoho module API Name
+    protected $zoho_module_name = 'Payments';
+
     public function searchCriteria(){
         // you should return string of criteria that you want to find current record in crm with.
         //EX:
