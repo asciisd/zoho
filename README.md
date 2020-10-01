@@ -251,6 +251,24 @@ $builder = CriteriaBuilder::where('City', 'NY')->andWhere('State','Alden')->star
 ZohoManager::useModule('Leads')->searchRecordsByCriteria($builder->toString());
 ```
 
+## International Versions
+
+If you're using zoho.com, you don't have to change anything.
+
+If you're using zoho.eu, add to `.env`:
+
+```
+ZOHO_ACCOUNTS_URL=https://accounts.zoho.eu
+ZOHO_API_BASE_URL=www.zohoapis.eu
+```
+
+If you're using zoho.com.cn, add to `.env`: 
+
+```
+ZOHO_ACCOUNTS_URL=https://accounts.zoho.com.cn
+ZOHO_API_BASE_URL=www.zohoapis.com.cn
+```
+
 ## License
 
 [MIT License](https://opensource.org/licenses/MIT). Copyright (c) 2020, Asciisd
