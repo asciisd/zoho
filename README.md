@@ -126,7 +126,7 @@ class Invoice extends Zohoable {
 so now you can use invoice like this
 
 ```php
-$invoice = App\Invoice::find(1);
+$invoice = \App\Invoice::find(1);
 
 // to check if has zoho id stored on local database or not
 $invoice->hasZohoId();
