@@ -18,7 +18,7 @@
     "ext-json": "*",
     "illuminate/support": "^6.0|^7.0|^8.0",
     "nesbot/carbon": "^2.0",
-    "zohocrm/php-sdk": "^2.1"
+    "zohocrm/php-sdk-archive": "^2.2"
   },
   "require-dev": {
     "mockery/mockery": "^1.0",
