@@ -143,6 +143,7 @@ $invoice->createOrUpdateZohoId($id = null);
 // Also you can pass additional fields as array to this method
 $invoice->createAsZohoable($options = []);
 ```
+**Note:** To use the Invoice like this, you must have the `invoices` table in your database just like you would for any Laravel model. This allows you to save data to the database and also be able to link it to the `zohos` table and use all the functions in `Zohoable`. Use the CRUD functions below if you do not intend to use the Zohoable model this way. 
 
 ## CRUD Can be used like this:-
 
