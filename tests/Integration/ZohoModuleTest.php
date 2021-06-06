@@ -2,6 +2,7 @@
 
 namespace Asciisd\Zoho\Tests\Integration;
 
+use Asciisd\Zoho\Facades\ZohoManager;
 use Asciisd\Zoho\ZohoModule;
 use zcrmsdk\crm\crud\ZCRMModule;
 use zcrmsdk\crm\crud\ZCRMRecord;
@@ -159,5 +160,11 @@ class ZohoModuleTest extends IntegrationTestCase
         $lead = $lead->update()->getData();
 
         self::assertEquals('Ahmed', $lead->getFieldValue('Last_Name'));
+    }
+
+    /** @test */
+    public function it_can_fetch_nested_data_with_module() {
+        $contacts = ZohoManager::useModule('Contacts');
+        $contacts->getAllModules();
     }
 }
