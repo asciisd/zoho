@@ -130,7 +130,7 @@ trait Zohoable
     }
 
     /**
-     * Create a Tap customer for the given model.
+     * Create a Zoho record for the given model.
      *
      * @param array $options
      * @return object
@@ -155,24 +155,28 @@ trait Zohoable
     }
 
     /**
-     * Update current zoho id for this model
+     * Update Zoho record for the given model.
      *
-     * @param null $id
-     * @return mixed
+     * @param array $options
+     * @return object
      * @throws InvalidZohoable
      */
-    public function updateZohoId($id = null)
+    public function updateZohoable(array $options = [])
     {
         if (!$this->hasZohoId()) {
             throw InvalidZohoable::nonZohoable($this);
         }
 
-        if (!$id) {
-            $id = $this->findByCriteria()->getEntityId();
-        }
+        $options = array_merge($this->zohoMandatoryFields(), $options);
 
-        $this->zoho()->update(['zoho_id' => $id]);
-        return $this->load('zoho');
+        // Here we will create the ZCRMRecord instance on Zoho and store the ID of the
+        // record from Zoho. This ID will correspond with the Zoho record instance
+        // and allow us to retrieve records from Zoho later when we need to work.
+        $record = $this->update($options);
+
+        $this->createOrUpdateZohoId($record->getEntityId());
+
+        return $record;
     }
 
     /**
