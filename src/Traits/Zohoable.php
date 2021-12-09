@@ -155,6 +155,27 @@ trait Zohoable
     }
 
     /**
+     * Update current zoho id for this model
+     *
+     * @param null $id
+     * @return mixed
+     * @throws InvalidZohoable
+     */
+    public function updateZohoId($id = null)
+    {
+        if (!$this->hasZohoId()) {
+            throw InvalidZohoable::nonZohoable($this);
+        }
+
+        if (!$id) {
+            $id = $this->findByCriteria()->getEntityId();
+        }
+
+        $this->zoho()->update(['zoho_id' => $id]);
+        return $this->load('zoho');
+    }
+
+    /**
      * Find and delete zoho record and remove zoho_id from model
      *
      * @return mixed
