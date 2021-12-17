@@ -175,7 +175,7 @@ trait Zohoable
         $record = $this->asZohoObject();
 
         foreach($options as $key => $value) {
-            $record->setProperty($key, $value);
+            $record->setFieldValue($key, $value);
         }
 
         $isUpdated = $record->update();
