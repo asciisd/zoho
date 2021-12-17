@@ -172,9 +172,17 @@ trait Zohoable
         // Here we will create the ZCRMRecord instance on Zoho and store the ID of the
         // record from Zoho. This ID will correspond with the Zoho record instance
         // and allow us to retrieve records from Zoho later when we need to work.
-        $record = $this->zoho_module->update($options);
+        $record = $this->asZohoObject();
 
-        $this->createOrUpdateZohoId($record->getEntityId());
+        foreach($options as $key => $value) {
+            $record->setProperty($key, $value);
+        }
+
+        $isUpdated = $record->update();
+
+        if($isUpdated) {
+            $this->createOrUpdateZohoId($record->getEntityId());
+        }
 
         return $record;
     }

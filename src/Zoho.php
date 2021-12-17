@@ -9,7 +9,7 @@ class Zoho
      *
      * @var string
      */
-    const VERSION = '1.2.5';
+    const VERSION = '1.2.6';
 
     /**
      * Indicates if Zoho migrations will be run.
