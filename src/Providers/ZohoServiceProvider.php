@@ -2,12 +2,22 @@
 
 namespace Asciisd\Zoho\Providers;
 
+use App\Support\Zoho\TokenStore;
 use Asciisd\Zoho\Console\Commands\ZohoAuthentication;
 use Asciisd\Zoho\Console\Commands\ZohoInstallCommand;
 use Asciisd\Zoho\Console\Commands\ZohoSetupCommand;
 use Asciisd\Zoho\RestClient;
 use Asciisd\Zoho\Zoho;
+use com\zoho\api\authenticator\OAuthToken;
+use com\zoho\api\authenticator\TokenType;
+use com\zoho\api\logger\Levels;
+use com\zoho\api\logger\Logger;
+use com\zoho\crm\api\dc\EUDataCenter;
+use com\zoho\crm\api\Initializer;
+use com\zoho\crm\api\SDKConfigBuilder;
+use com\zoho\crm\api\UserSignature;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
@@ -27,22 +37,6 @@ class ZohoServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->configure();
-        $this->registerCommands();
-        $this->registerSingleton();
-
-        if (!class_exists('Zoho')) {
-            class_alias('Asciisd\Zoho\Zoho', 'Zoho');
-        }
-    }
-
-    /**
      * Register the package routes.
      *
      * @return void
@@ -58,17 +52,6 @@ class ZohoServiceProvider extends ServiceProvider
                 $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
             });
         }
-    }
-
-    /**
-     * Register the package resources.
-     *
-     * @return void
-     */
-    protected function registerResources()
-    {
-        $this->loadJsonTranslationsFrom(__DIR__ . '/../../resources/lang');
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'zoho');
     }
 
     /**
@@ -119,6 +102,22 @@ class ZohoServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->configure();
+        $this->registerCommands();
+        $this->registerSingleton();
+
+        if (!class_exists('Zoho')) {
+            class_alias('Asciisd\Zoho\Zoho', 'Zoho');
+        }
+    }
+
+    /**
      * Setup the configuration for Zoho.
      *
      * @return void
@@ -144,8 +143,35 @@ class ZohoServiceProvider extends ServiceProvider
     private function registerSingleton()
     {
         $this->app->bind('zoho_manager', function ($app) {
-            ZCRMRestClient::initialize(Zoho::zohoOptions());
-            return new RestClient(ZCRMRestClient::getInstance());
+            $zohoOptions = collect(Zoho::zohoOptions());
+            $logger = Logger::getInstance(Levels::ALL, $zohoOptions->get('applicationLogFilePath') . '/zoho-api.log');
+            $user = new UserSignature($zohoOptions->get('currentUserEmail'));
+            $tokenStore = new TokenStore('zoho/oauth/tokens');
+            $token = new OAuthToken(
+                $zohoOptions->get('client_id'),
+                $zohoOptions->get('client_secret'),
+                '',
+                TokenType::REFRESH,
+                $zohoOptions->get('redirect_uri')
+            );
+            $token = $tokenStore->getToken($user, $token);
+            if ($token) {
+                $sdkConfig = (new SDKConfigBuilder())->setAutoRefreshFields(true)->setPickListValidation(false)->setSSLVerification(true)->connectionTimeout(2)->timeout(2)->build();
+                $environment = EUDataCenter::PRODUCTION();
+                Initializer::initialize($user, $environment, $token, $tokenStore, $sdkConfig, Storage::disk('local')->path('zoho/resources/'), $logger);
+            }
+            return new RestClient(Initializer::getInitializer());
         });
+    }
+
+    /**
+     * Register the package resources.
+     *
+     * @return void
+     */
+    protected function registerResources()
+    {
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../../resources/lang');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'zoho');
     }
 }

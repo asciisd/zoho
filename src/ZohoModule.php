@@ -2,90 +2,92 @@
 
 namespace Asciisd\Zoho;
 
+use com\zoho\crm\api\exception\SDKException;
+use com\zoho\crm\api\fields\FieldsOperations;
+use com\zoho\crm\api\Initializer;
+use com\zoho\crm\api\modules\Module;
+use com\zoho\crm\api\modules\ModulesOperations;
+use com\zoho\crm\api\modules\ResponseWrapper;
+use com\zoho\crm\api\ParameterMap;
+use com\zoho\crm\api\record\BodyWrapper;
+use com\zoho\crm\api\record\Field;
+use com\zoho\crm\api\record\Record;
+use com\zoho\crm\api\record\RecordOperations;
+use com\zoho\crm\api\record\SearchRecordsParam;
+use com\zoho\crm\api\util\APIResponse;
 use zcrmsdk\crm\crud\ZCRMModule;
 use zcrmsdk\crm\crud\ZCRMRecord;
 use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
 class ZohoModule
 {
-    protected $rest;
-    protected $module_api_name;
-    protected $moduleIns;
-    protected $operators = ['equals', 'starts_with'];
+    protected Initializer $initializer;
+    protected string $moduleApiName;
+    protected array $operators = ['equals', 'starts_with'];
 
     /**
      * ZohoModule constructor.
-     *
-     * @param ZCRMRestClient $rest
-     * @param $module_api_name
      */
-    public function __construct($rest, $module_api_name)
+    public function __construct(Initializer $rest, string $moduleApiName)
     {
-        $this->rest = $rest;
-        $this->module_api_name = $module_api_name;
-        $this->moduleIns = $this->getModuleInstance();
+        $this->initializer = $rest;
+        $this->moduleApiName = $moduleApiName;
     }
+
 
     /**
      * to get the the modules in form of ZCRMModule instances array
      *
-     * @return ZCRMModule[]
+     * @return APIResponse
      */
     public function getAllModules()
     {
-        return $this->rest->getAllModules()->getData();
+        $modules = new ModulesOperations();
+        return $modules->getModules();
     }
 
     /**
      * to get the module in form of ZCRMModule instance
      *
-     * @return ZCRMModule|object
+     * @return Module|null
      */
-    public function getModule()
+    public function getModule(): ?Module
     {
-        return $this->rest->getModule($this->module_api_name)->getData();
+        try {
+            $modules = new ModulesOperations();
+            /** @var ResponseWrapper $module */
+            $module = $modules->getModule($this->moduleApiName)->getObject();
+            if (count($module->getModules()) > 0) {
+                return $module->getModules()[0] ?? null;
+            } else {
+                return null;
+            }
+        } catch (SDKException) {
+            return null;
+        }
     }
 
     /**
-     * get record instance
-     *
-     * @param $record_id
-     * @return ZCRMRecord
+     * @return APIResponse
      */
-    public function getRecordInstance($record_id = null)
+    public function getRecords(): APIResponse
     {
-        return $this->rest->getRecordInstance($this->module_api_name, $record_id);
+        try {
+            $recordOperations = new RecordOperations();
+            return $recordOperations->getRecords($this->moduleApiName);
+        } catch (SDKException $exception) {
+            dd($exception);
+        }
     }
 
     /**
-     * get dummy module object
-     *
-     * @return ZCRMModule
+     * @param string $recordId
+     * @return APIResponse
      */
-    public function getModuleInstance()
+    public function getRecord(string $recordId): APIResponse
     {
-        return $this->rest->getModuleInstance($this->module_api_name);
-    }
-
-    /**
-     * get the records array of given module api name
-     *
-     * @return ZCRMRecord[]
-     */
-    public function getRecords()
-    {
-        return $this->moduleIns->getRecords()->getData();
-    }
-
-    /**
-     * get the record object of given module api name and record id
-     *
-     * @param string $record_id
-     * @return object|ZCRMRecord
-     */
-    public function getRecord($record_id)
-    {
-        return $this->moduleIns->getRecord($record_id)->getData();
+        $recordOperations = new RecordOperations();
+        return $recordOperations->getRecord($recordId, $this->moduleApiName);
     }
 
     /**
@@ -94,12 +96,20 @@ class ZohoModule
      * @param string $word //word to be searched
      * @param int $page //to get the list of records from the respective pages. Default value for page is 1.
      * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
-     * @return ZCRMRecord[]
+     * @return APIResponse
      */
     public function searchRecordsByWord($word = '', $page = 1, $perPage = 200)
     {
-        $param_map = ["page" => $page, "per_page" => $perPage];
-        return $this->moduleIns->searchRecordsByWord($word, $param_map)->getData();
+        try {
+            $recordOperations = new RecordOperations();
+            $paramInstance = new ParameterMap();
+            $paramInstance->add(SearchRecordsParam::word(), $word);
+            $paramInstance->add(SearchRecordsParam::page(), $page);
+            $paramInstance->add(SearchRecordsParam::perPage(), $perPage);
+            return $recordOperations->searchRecords($this->moduleApiName, $paramInstance);
+        } catch (SDKException $exception) {
+            return null;
+        }
     }
 
     /**
@@ -108,12 +118,20 @@ class ZohoModule
      * @param string $phone //phone to be searched
      * @param int $page //to get the list of records from the respective pages. Default value for page is 1.
      * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
-     * @return ZCRMRecord[]
+     * @return APIResponse
      */
     public function searchRecordsByPhone($phone = '', $page = 1, $perPage = 200)
     {
-        $param_map = ["page" => $page, "per_page" => $perPage];
-        return $this->moduleIns->searchRecordsByPhone($phone, $param_map)->getData();
+        try {
+            $recordOperations = new RecordOperations();
+            $paramInstance = new ParameterMap();
+            $paramInstance->add(SearchRecordsParam::phone(), $phone);
+            $paramInstance->add(SearchRecordsParam::page(), $page);
+            $paramInstance->add(SearchRecordsParam::perPage(), $perPage);
+            return $recordOperations->searchRecords($this->moduleApiName, $paramInstance);
+        } catch (SDKException $exception) {
+            return null;
+        }
     }
 
     /**
@@ -122,57 +140,81 @@ class ZohoModule
      * @param string $email //email to be searched
      * @param int $page //to get the list of records from the respective pages. Default value for page is 1.
      * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
-     * @return ZCRMRecord[]
+     * @return APIResponse
      */
     public function searchRecordsByEmail($email = '', $page = 1, $perPage = 200)
     {
-        $param_map = ["page" => $page, "per_page" => $perPage];
-        return $this->moduleIns->searchRecordsByEmail($email, $param_map)->getData();
-    }
-
-    /**
-     * get module records
-     *
-     * @param string $criteria //criteria to search for
-     * @param int $page //to get the list of records from the respective pages. Default value for page is 1.
-     * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
-     * @return ZCRMRecord[]
-     */
-    public function searchRecordsByCriteria($criteria, $page = 1, $perPage = 200)
-    {
-        $param_map = ["page" => $page, "per_page" => $perPage];
-        return $this->moduleIns->searchRecordsByCriteria($criteria, $param_map)->getData();
+        try {
+            $recordOperations = new RecordOperations();
+            $paramInstance = new ParameterMap();
+            $paramInstance->add(SearchRecordsParam::email(), $email);
+            $paramInstance->add(SearchRecordsParam::page(), $page);
+            $paramInstance->add(SearchRecordsParam::perPage(), $perPage);
+            return $recordOperations->searchRecords($this->moduleApiName, $paramInstance);
+        } catch (SDKException $exception) {
+            return null;
+        }
     }
 
     /**
      * Add new entities to a module.
      *
-     * @param ZCRMRecord $record
-     * @return ZCRMRecord[]
      */
     public function insert($record)
     {
-        $records = [];
-
-        array_push($records, $record);
+        $recordOperations = new RecordOperations();
+        $bodyWrapper = new BodyWrapper();
+        $records = [$record];
         return $this->moduleIns->createRecords($records)->getData();
     }
 
     /**
-     * create record instance that contains the array keys and values
-     *
      * @param array $args
-     * @return object
+     * @return bool
      */
-    public function create($args = [])
+    public function create(array $args = []): bool
     {
-        $record = $this->getRecordInstance();
-
-        foreach ($args as $key => $value) {
-            $record->setFieldValue($key, $value);
+        try {
+            $recordOperations = new RecordOperations();
+            $request = new BodyWrapper();
+            $record = $this->getRecordInstance();
+            foreach ($args as $key => $value) {
+                $record->addFieldValue(new Field($key), $value);
+            }
+            $request->setData([$record]);
+            $request = $recordOperations->createRecords($this->moduleApiName, $request);
+            if ($request->getStatusCode() == '201') {
+                $successResponse = $request->getObject()->getData()[0];
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SDKException $exception) {
+            info('ZOHO-SDK-ERROR: ' . $exception->getMessage());
+            return false;
         }
+    }
 
-        return $record->create()->getData();
+    /**
+     * get record instance
+     *
+     * @param $recordId
+     * @return Record
+     */
+    public function getRecordInstance($recordId = null): Record
+    {
+        $record = new Record();
+        if ($recordId) {
+            $record->setId($recordId);
+        }
+        return $record;
+    }
+
+    public function getFields(): APIResponse
+    {
+        $fieldOperations = new FieldsOperations($this->moduleApiName);
+        $paramInstance = new ParameterMap();
+        return $fieldOperations->getFields($paramInstance);
     }
 
     /**
@@ -202,5 +244,19 @@ class ZohoModule
         }
 
         return null;
+    }
+
+    /**
+     * get module records
+     *
+     * @param string $criteria //criteria to search for
+     * @param int $page //to get the list of records from the respective pages. Default value for page is 1.
+     * @param int $perPage //To get the list of records available per page. Default value for per page is 200.
+     * @return ZCRMRecord[]
+     */
+    public function searchRecordsByCriteria($criteria, $page = 1, $perPage = 200)
+    {
+        $param_map = ["page" => $page, "per_page" => $perPage];
+        return $this->moduleIns->searchRecordsByCriteria($criteria, $param_map)->getData();
     }
 }

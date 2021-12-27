@@ -10,15 +10,14 @@ use zcrmsdk\crm\setup\users\ZCRMUser;
 
 class ZohoOrganization
 {
-    protected $rest;
+    protected array $zohoOptions;
 
     /**
      * ZohoOrganization constructor.
-     * @param ZCRMRestClient $rest
      */
-    public function __construct($rest)
+    public function __construct(array $zohoOptions)
     {
-        $this->rest = $rest;
+        $this->zohoOptions = $zohoOptions;
     }
 
     /**
@@ -28,6 +27,7 @@ class ZohoOrganization
      */
     public function getOrganizationDetails()
     {
+
         return $this->rest->getOrganizationInstance();
     }
 
