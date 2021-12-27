@@ -1,55 +1,61 @@
 {
-  "name": "asciisd/zoho",
-  "description": "Asciisd Zoho provide an elegant and easy way to communicate with Zoho CRM.",
-  "keywords": ["Laravel", "zoho", "crm"],
-  "license": "MIT",
-  "support": {
-    "issues": "https://github.com/asciisd/zoho/issues",
-    "source": "https://github.com/asciisd/zoho"
-  },
-  "authors": [
-    {
-      "name": "Amr Ahmed",
-      "email": "aemad@asciisd.com"
-    }
-  ],
-  "require": {
-    "php": "^7.2|^8.0",
-    "ext-json": "*",
-    "illuminate/support": "^6.0|^7.0|^8.0",
-    "nesbot/carbon": "^2.0",
-    "zohocrm/php-sdk": "^3.1.0"
-  },
-  "require-dev": {
-    "mockery/mockery": "^1.0",
-    "orchestra/testbench": "^4.0|^5.0",
-    "phpunit/phpunit": "^8.0|^9.0"
-  },
-  "suggest": {
-    "ext-intl": "Allows for more locales besides the default \"en\" when formatting money values."
-  },
-  "autoload": {
-    "psr-4": {
-      "Asciisd\\Zoho\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Asciisd\\Zoho\\Tests\\": "tests/"
-    }
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Asciisd\\Zoho\\Providers\\ZohoServiceProvider"
-      ]
-    }
-  },
-  "scripts": {
-    "test": "vendor/bin/phpunit -c ./phpunit.xml --colors=always",
-    "analysis": "vendor/bin/phpstan analyse"
-  },
-  "config": {
-    "sort-packages": true
-  }
+    "name": "asciisd/zoho",
+    "description": "Asciisd Zoho provide an elegant and easy way to communicate with Zoho CRM.",
+    "keywords": [
+        "Laravel",
+        "zoho",
+        "crm"
+    ],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/asciisd/zoho/issues",
+        "source": "https://github.com/asciisd/zoho"
+    },
+    "authors": [
+        {
+            "name": "Amr Ahmed",
+            "email": "aemad@asciisd.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^8.0",
+        "ext-json": "*",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "nesbot/carbon": "^2.0",
+        "zohocrm/php-sdk": "^3.1.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "orchestra/testbench": "^4.0|^5.0",
+        "phpunit/phpunit": "^8.0|^9.0"
+    },
+    "suggest": {
+        "ext-intl": "Allows for more locales besides the default \"en\" when formatting money values."
+    },
+    "autoload": {
+        "psr-4": {
+            "Asciisd\\Zoho\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Asciisd\\Zoho\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Asciisd\\Zoho\\Providers\\ZohoServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit -c ./phpunit.xml --colors=always",
+        "analysis": "vendor/bin/phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
