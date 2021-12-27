@@ -45,8 +45,9 @@ class ZohoAuthentication extends Command
         $prompt = 'consent';
         $response_type = 'code';
         $access_type = config('zoho.access_type');
+        $accounts_url = config('zoho.accounts_url');
 
-        $redirect_url = "https://accounts.zoho.com/oauth/v2/auth?scope={$scope}&prompt={$prompt}&client_id={$client_id}&response_type={$response_type}&access_type={$access_type}&redirect_uri={$client_domain}";
+        $redirect_url = "{$accounts_url}/oauth/v2/auth?scope={$scope}&prompt={$prompt}&client_id={$client_id}&response_type={$response_type}&access_type={$access_type}&redirect_uri={$client_domain}";
 
         $this->info('Copy the following url, past on browser and hit return.');
         $this->line($redirect_url);
