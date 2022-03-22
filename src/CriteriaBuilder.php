@@ -9,13 +9,13 @@ use Asciisd\Zoho\Facades\ZohoManager;
 class CriteriaBuilder
 {
     protected $criteria;
-    protected $moduleIns;
+    protected $module;
     protected $operators = ['equals', 'starts_with'];
     protected $page = 1;
     protected $perPage = 200;
 
-    public function __construct($moduleIns) {
-        $this->moduleIns = $moduleIns ?? ZohoManager::useModule('leads');
+    public function __construct($module) {
+        $this->module = $module ?? ZohoManager::useModule('leads');
     }
 
     /**
@@ -31,9 +31,9 @@ class CriteriaBuilder
         $field,
         $value,
         $operator = 'equals',
-        $moduleIns = null
+        $module = null
     ) {
-        $builder = new CriteriaBuilder($moduleIns);
+        $builder           = new CriteriaBuilder($module);
         $builder->criteria = "";
 
         $builder->criteria .= static::queryBuilder($field, $operator, $value);
@@ -91,11 +91,9 @@ class CriteriaBuilder
     }
 
     public function get() {
-        $param_map = ["page" => $this->page, "per_page" => $this->perPage];
-
-        return $this->moduleIns->searchRecordsByCriteria(
-            $this->getCriteria(), $param_map
-        )->getData();
+        return $this->module->searchRecordsByCriteria(
+            $this->getCriteria(), $this->page, $this->perPage
+        );
     }
 
     public function search() {

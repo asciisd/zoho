@@ -232,6 +232,6 @@ class ZohoModule
     }
 
     public function where($field, $value, $operator = 'equals') {
-        return CriteriaBuilder::where($field, $value, $operator, $this->moduleIns);
+        return CriteriaBuilder::where($field, $value, $operator, $this);
     }
 }
