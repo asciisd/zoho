@@ -20,9 +20,9 @@ class ZohoModule
      * @param $module_api_name
      */
     public function __construct($rest, $module_api_name) {
-        $this->rest = $rest;
+        $this->rest            = $rest;
         $this->module_api_name = $module_api_name;
-        $this->moduleIns = $this->getModuleInstance();
+        $this->moduleIns       = $this->getModuleInstance();
     }
 
     /**
@@ -71,6 +71,15 @@ class ZohoModule
      */
     public function getRecords() {
         return $this->moduleIns->getRecords()->getData();
+    }
+
+    /**
+     * get the records array of given module api name
+     *
+     * @return array
+     */
+    public function getJsonRecords() {
+        return $this->moduleIns->getRecords()->getResponseJSON();
     }
 
     /**
@@ -149,11 +158,7 @@ class ZohoModule
      *
      * @return ZCRMRecord[]
      */
-    public function searchRecordsByCriteria(
-        $criteria,
-        $page = 1,
-        $perPage = 200
-    ) {
+    public function searchRecordsByCriteria($criteria, $page = 1, $perPage = 200) {
         $param_map = ["page" => $page, "per_page" => $perPage];
 
         return $this->moduleIns->searchRecordsByCriteria($criteria, $param_map)
@@ -198,7 +203,7 @@ class ZohoModule
      * update existing entities in the module.
      *
      * @param ZCRMRecord $record
-     * @param string $trigger array of triggers
+     * @param string $trigger  array of triggers
      *
      * @return ZCRMRecord[]
      */
@@ -224,5 +229,9 @@ class ZohoModule
         }
 
         return null;
+    }
+
+    public function where($field, $value, $operator = 'equals') {
+        return CriteriaBuilder::where($field, $value, $operator, $this->moduleIns);
     }
 }
