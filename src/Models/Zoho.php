@@ -12,7 +12,7 @@ class Zoho extends Model
      * @var array
      */
     protected $fillable = [
-        'zohoable_type', 'zohoable_id', 'zoho_id'
+        'zohoable_type', 'zohoable_id', 'zoho_id',
     ];
 
     /**

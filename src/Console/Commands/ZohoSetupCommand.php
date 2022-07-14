@@ -2,8 +2,8 @@
 
 namespace Asciisd\Zoho\Console\Commands;
 
-use Asciisd\Zoho\Facades\ZohoManager;
 use Illuminate\Console\Command;
+use Asciisd\Zoho\Facades\ZohoManager;
 
 class ZohoSetupCommand extends Command
 {
@@ -12,8 +12,7 @@ class ZohoSetupCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'zoho:grant
-                            {token : generate grant token from https://accounts.zoho.com/developerconsole}';
+    protected $signature = 'zoho:grant {token : generate grant token from https://accounts.zoho.com/developerconsole}';
 
     /**
      * The console command description.
@@ -41,8 +40,9 @@ class ZohoSetupCommand extends Command
     {
         $grantToken = $this->argument('token');
 
-        if (!$grantToken) {
+        if ( ! $grantToken) {
             $this->error('The Grant Token is required.');
+
             return;
         }
 

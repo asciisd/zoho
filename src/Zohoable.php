@@ -2,9 +2,9 @@
 
 namespace Asciisd\Zoho;
 
-use Asciisd\Zoho\Contracts\Repositories\ZohoableRepository;
-use Asciisd\Zoho\Traits\Zohoable as ZohoableModel;
 use Illuminate\Database\Eloquent\Model;
+use Asciisd\Zoho\Traits\Zohoable as ZohoableModel;
+use Asciisd\Zoho\Contracts\Repositories\ZohoableRepository;
 
 abstract class Zohoable extends Model implements ZohoableRepository
 {

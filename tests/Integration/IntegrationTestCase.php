@@ -13,17 +13,17 @@ abstract class IntegrationTestCase extends TestCase
         parent::setUpBeforeClass();
 
         $configuration = [
-            'client_id' => getenv('ZOHO_CLIENT_ID'),
-            'client_secret' => getenv('ZOHO_CLIENT_SECRET'),
-            'redirect_uri' => getenv('ZOHO_REDIRECT_URI'),
-            'currentUserEmail' => getenv('ZOHO_CURRENT_USER_EMAIL'),
-            'applicationLogFilePath' => './tests/Fixture/Storage/oauth/logs',
-            'token_persistence_path' => './tests/Fixture/Storage/oauth/tokens',
-            'accounts_url' => 'https://accounts.zoho.com',
-            'sandbox' => true,
-            'apiBaseUrl' => 'www.zohoapis.com',
-            'apiVersion' => 'v2',
-            'access_type' => 'offline',
+            'client_id'                 => getenv('ZOHO_CLIENT_ID'),
+            'client_secret'             => getenv('ZOHO_CLIENT_SECRET'),
+            'redirect_uri'              => getenv('ZOHO_REDIRECT_URI'),
+            'currentUserEmail'          => getenv('ZOHO_CURRENT_USER_EMAIL'),
+            'applicationLogFilePath'    => './tests/Fixture/Storage/oauth/logs',
+            'token_persistence_path'    => './tests/Fixture/Storage/oauth/tokens',
+            'accounts_url'              => 'https://accounts.zoho.com',
+            'sandbox'                   => true,
+            'apiBaseUrl'                => 'www.zohoapis.com',
+            'apiVersion'                => 'v2',
+            'access_type'               => 'offline',
             'persistence_handler_class' => 'ZohoOAuthPersistenceHandler',
         ];
 

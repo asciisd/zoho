@@ -2,14 +2,14 @@
 
 namespace Asciisd\Zoho\Traits;
 
-use Asciisd\Zoho\Exceptions\InvalidZohoable;
-use Asciisd\Zoho\Facades\ZohoManager;
-use Asciisd\Zoho\Models\Zoho as ZohoModel;
-use Asciisd\Zoho\ZohoModule;
 use Exception;
 use Illuminate\Support\Str;
+use Asciisd\Zoho\ZohoModule;
 use zcrmsdk\crm\crud\ZCRMRecord;
+use Asciisd\Zoho\Facades\ZohoManager;
 use zcrmsdk\crm\exception\ZCRMException;
+use Asciisd\Zoho\Models\Zoho as ZohoModel;
+use Asciisd\Zoho\Exceptions\InvalidZohoable;
 
 trait Zohoable
 {
@@ -25,7 +25,9 @@ trait Zohoable
      */
     public function zohoId()
     {
-        if (!$this->zoho) return null;
+        if ( ! $this->zoho) {
+            return null;
+        }
 
         return $this->zoho->zoho_id;
     }
@@ -37,13 +39,14 @@ trait Zohoable
      */
     public function hasZohoId()
     {
-        return !is_null($this->zohoId());
+        return ! is_null($this->zohoId());
     }
 
     /**
      * create or update the current model with zoho id
      *
-     * @param null $id
+     * @param  null  $id
+     *
      * @return mixed
      * @throws Exception
      */
@@ -63,28 +66,31 @@ trait Zohoable
     /**
      * Update current zoho id for this model
      *
-     * @param null $id
+     * @param  null  $id
+     *
      * @return mixed
      * @throws InvalidZohoable
      */
     public function updateZohoId($id = null)
     {
-        if (!$this->hasZohoId()) {
+        if ( ! $this->hasZohoId()) {
             throw InvalidZohoable::nonZohoable($this);
         }
 
-        if (!$id) {
+        if ( ! $id) {
             $id = $this->findByCriteria()->getEntityId();
         }
 
         $this->zoho()->update(['zoho_id' => $id]);
+
         return $this->load('zoho');
     }
 
     /**
      * create zoho id from $id or search on zoho by criteria
      *
-     * @param null $id
+     * @param  null  $id
+     *
      * @return mixed
      * @throws InvalidZohoable
      */
@@ -94,11 +100,12 @@ trait Zohoable
             throw InvalidZohoable::exists($this);
         }
 
-        if (!$id) {
+        if ( ! $id) {
             $id = $this->findByCriteria()->getEntityId();
         }
 
         $this->zoho()->create(['zoho_id' => $id]);
+
         return $this->load('zoho');
     }
 
@@ -110,17 +117,20 @@ trait Zohoable
      */
     public function deleteZohoId()
     {
-        if (!$this->hasZohoId()) {
+        if ( ! $this->hasZohoId()) {
             throw InvalidZohoable::nonZohoable($this);
         }
 
         $this->zoho()->delete();
+
         return $this->load('zoho');
     }
 
     protected function findByCriteria()
     {
-        if ($this->searchCriteria() == '') return null;
+        if ($this->searchCriteria() == '') {
+            return null;
+        }
 
         return last(
             $this->zoho_module->searchRecordsByCriteria(
@@ -132,7 +142,8 @@ trait Zohoable
     /**
      * Create a Zoho record for the given model.
      *
-     * @param array $options
+     * @param  array  $options
+     *
      * @return object
      * @throws InvalidZohoable
      */
@@ -157,13 +168,14 @@ trait Zohoable
     /**
      * Update Zoho record for the given model.
      *
-     * @param array $options
+     * @param  array  $options
+     *
      * @return object
      * @throws InvalidZohoable
      */
     public function updateZohoable(array $options = [])
     {
-        if (!$this->hasZohoId()) {
+        if ( ! $this->hasZohoId()) {
             throw InvalidZohoable::nonZohoable($this);
         }
 
@@ -174,13 +186,13 @@ trait Zohoable
         // and allow us to retrieve records from Zoho later when we need to work.
         $record = $this->asZohoObject();
 
-        foreach($options as $key => $value) {
+        foreach ($options as $key => $value) {
             $record->setFieldValue($key, $value);
         }
 
         $isUpdated = $record->update();
 
-        if($isUpdated) {
+        if ($isUpdated) {
             $this->createOrUpdateZohoId($record->getEntityId());
         }
 
@@ -197,6 +209,7 @@ trait Zohoable
     public function deleteZohoable()
     {
         $this->asZohoObject()->delete();
+
         return $this->deleteZohoId();
     }
 
@@ -236,9 +249,10 @@ trait Zohoable
     }
 
     /**
-     * find record by it's ID
+     * find record by its ID
      *
      * @param $id
+     *
      * @return object|ZCRMRecord
      */
     public function findByZohoId($id)
@@ -254,7 +268,7 @@ trait Zohoable
      */
     protected function assertZohoableExists()
     {
-        if (!$this->zohoId()) {
+        if ( ! $this->zohoId()) {
             throw InvalidZohoable::nonZohoable($this);
         }
     }

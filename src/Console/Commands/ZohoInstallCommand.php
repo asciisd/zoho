@@ -43,8 +43,8 @@ class ZohoInstallCommand extends Command
         Storage::disk('local')->put('zoho/oauth/logs/ZCRMClientLibrary.log', '');
         Storage::disk('local')->put('zoho/oauth/tokens/zcrm_oauthtokens.txt', '');
 
-//        $this->comment('Publishing Zoho Configuration ...');
-//        $this->callSilent('vendor:publish', ['--tag' => 'zoho-config']);
+        //        $this->comment('Publishing Zoho Configuration ...');
+        //        $this->callSilent('vendor:publish', ['--tag' => 'zoho-config']);
 
         $this->info('Zoho scaffolding installed successfully.');
     }

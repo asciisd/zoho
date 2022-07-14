@@ -2,9 +2,9 @@
 
 namespace Asciisd\Zoho;
 
-use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
-use zcrmsdk\oauth\exception\ZohoOAuthException;
 use zcrmsdk\oauth\ZohoOAuth;
+use zcrmsdk\oauth\exception\ZohoOAuthException;
+use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
 
 /**
  * Class RestClient
@@ -20,7 +20,7 @@ class RestClient
     /**
      * RestClient constructor.
      *
-     * @param ZCRMRestClient $rest
+     * @param  ZCRMRestClient  $rest
      */
     public function __construct($rest)
     {
@@ -44,12 +44,14 @@ class RestClient
 
     /**
      * @param $grantToken
+     *
      * @return mixed
      * @throws ZohoOAuthException
      */
     public static function generateAccessToken($grantToken)
     {
         $oAuthClient = ZohoOAuth::getClientInstance();
+
         return $oAuthClient->generateAccessToken($grantToken);
     }
 }

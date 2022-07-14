@@ -4,9 +4,9 @@
 namespace Asciisd\Zoho;
 
 
+use zcrmsdk\crm\setup\users\ZCRMUser;
 use zcrmsdk\crm\setup\org\ZCRMOrganization;
 use zcrmsdk\crm\setup\restclient\ZCRMRestClient;
-use zcrmsdk\crm\setup\users\ZCRMUser;
 
 class ZohoOrganization
 {
@@ -14,7 +14,8 @@ class ZohoOrganization
 
     /**
      * ZohoOrganization constructor.
-     * @param ZCRMRestClient $rest
+     *
+     * @param  ZCRMRestClient  $rest
      */
     public function __construct($rest)
     {

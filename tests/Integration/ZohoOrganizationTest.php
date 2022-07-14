@@ -12,7 +12,7 @@ class ZohoOrganizationTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $client = $this->getClient();
+        $client    = $this->getClient();
         $this->org = $client->currentOrg();
     }
 

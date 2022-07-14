@@ -17,21 +17,24 @@ class ZohoModuleTest extends IntegrationTestCase
     private $module;
 
     /** @test */
-    public function it_can_get_all_modules() {
+    public function it_can_get_all_modules()
+    {
         $leads = $this->client->getAllModules();
 
         self::assertInstanceOf(ZCRMModule::class, $leads[0]);
     }
 
     /** @test */
-    public function is_can_get_module_by_name() {
+    public function is_can_get_module_by_name()
+    {
         $leads = $this->client->useModule();
 
         self::assertInstanceOf(ZohoModule::class, $leads);
     }
 
     /** @test */
-    public function it_can_instantiate_a_record_with_id() {
+    public function it_can_instantiate_a_record_with_id()
+    {
         $record = $this->module->getRecordInstance(self::LEAD_ID_FOR_TEST);
         self::assertInstanceOf(ZCRMRecord::class, $record);
         self::assertEquals('Leads', $record->getModuleApiName());
@@ -39,26 +42,30 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_instantiate_a_module_with_api_name() {
+    public function it_can_instantiate_a_module_with_api_name()
+    {
         $module = $this->module->getModuleInstance();
         self::assertInstanceOf(ZCRMModule::class, $module);
         self::assertEquals('Leads', $module->getAPIName());
     }
 
     /** @test */
-    public function it_can_get_records_for_given_module_api_name() {
+    public function it_can_get_records_for_given_module_api_name()
+    {
         $records = $this->module->getRecords();
         self::assertInstanceOf(ZCRMRecord::class, $records[0]);
     }
 
     /** @test */
-    public function it_can_get_record_by_module_api_name_and_record_id() {
+    public function it_can_get_record_by_module_api_name_and_record_id()
+    {
         $record = $this->module->getRecord(self::LEAD_ID_FOR_TEST);
         self::assertInstanceOf(ZCRMRecord::class, $record);
     }
 
     /** @test */
-    public function it_can_search_for_word_on_specific_module() {
+    public function it_can_search_for_word_on_specific_module()
+    {
         $records = $this->module->searchRecordsByWord('Amr Ahmed');
 
         self::assertInstanceOf(ZCRMRecord::class, end($records));
@@ -67,7 +74,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_for_phone_on_specific_module() {
+    public function it_can_search_for_phone_on_specific_module()
+    {
         $records = $this->module->searchRecordsByPhone('01011441444');
 
         dump($records->getData());
@@ -77,7 +85,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_for_email_on_specific_module() {
+    public function it_can_search_for_email_on_specific_module()
+    {
         $records = $this->module->searchRecordsByEmail('aemaddin@gmail.com');
 
         self::assertInstanceOf(ZCRMRecord::class, $records[0]);
@@ -86,7 +95,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_by_criteria() {
+    public function it_can_search_by_criteria()
+    {
         $records =
             $this->module->searchRecordsByCriteria("(City:equals:Al Wasitah) and (State:equals:Al Fayyum)");
 
@@ -96,7 +106,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    function it_can_search_by_criteria_builder() {
+    function it_can_search_by_criteria_builder()
+    {
         $records =
             ZohoManager::useModule('Contacts')->search(
                 CriteriaBuilder::where('City', 'Al Wasitah')
@@ -109,7 +120,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_by_field_name() {
+    public function it_can_search_by_field_name()
+    {
         $records = $this->module->where('City', 'Al Wasitah')->search();
 
         self::assertInstanceOf(ZCRMRecord::class, $records[0]);
@@ -118,7 +130,8 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_search_with_multiple_criteria() {
+    public function it_can_search_with_multiple_criteria()
+    {
         $records = $this->module
             ->where('City', 'Al Wasitah')
             ->andWhere('State', 'Al Fayyum')
@@ -132,7 +145,8 @@ class ZohoModuleTest extends IntegrationTestCase
     /** @test
      * @throws ZCRMException
      */
-    public function it_can_create_new_record() {
+    public function it_can_create_new_record()
+    {
         $lead = $this->module->getRecordInstance();
 
         $lead->setFieldValue('First_Name', 'Amr');
@@ -153,7 +167,8 @@ class ZohoModuleTest extends IntegrationTestCase
     /** @test
      * @throws ZCRMException
      */
-    public function it_can_update_records() {
+    public function it_can_update_records()
+    {
         $lead = $this->module->getRecord('3582074000002383003');
 
         $lead->setFieldValue('Last_Name', 'Ahmed');
@@ -163,12 +178,14 @@ class ZohoModuleTest extends IntegrationTestCase
     }
 
     /** @test */
-    public function it_can_fetch_nested_data_with_module() {
+    public function it_can_fetch_nested_data_with_module()
+    {
         $contacts = ZohoManager::useModule('Contacts');
         $contacts->getAllModules();
     }
 
-    protected function setUp(): void {
+    protected function setUp(): void
+    {
         parent::setUp();
 
         $this->client = $this->getClient();
