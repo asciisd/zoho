@@ -73,9 +73,11 @@ class ZohoModule
      *
      * @return ZCRMRecord[]
      */
-    public function getRecords()
+    public function getRecords($page = 1, $perPage = 200)
     {
-        return $this->moduleIns->getRecords()->getData();
+        $param_map = ["page" => $page, "per_page" => $perPage];
+
+        return $this->moduleIns->getRecords($param_map)->getData();
     }
 
     /**
@@ -83,9 +85,11 @@ class ZohoModule
      *
      * @return array
      */
-    public function getJsonRecords()
+    public function getJsonRecords($page = 1, $perPage = 200)
     {
-        return $this->moduleIns->getRecords()->getResponseJSON();
+        $param_map = ["page" => $page, "per_page" => $perPage];
+
+        return $this->moduleIns->getRecords($param_map)->getResponseJSON();
     }
 
     /**
