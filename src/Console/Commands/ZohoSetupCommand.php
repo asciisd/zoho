@@ -43,7 +43,7 @@ class ZohoSetupCommand extends Command
         if ( ! $grantToken) {
             $this->error('The Grant Token is required.');
 
-            return;
+            return 0;
         }
 
         ZohoManager::generateAccessToken($grantToken);
