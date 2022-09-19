@@ -48,7 +48,10 @@ ZOHO_REDIRECT_URI=
 ZOHO_CURRENT_USER_EMAIL=
 ```
 
-Then, follow the next steps:
+> **please note** that for `ZOHO_REDIRECT_URI` you need to put your `app_url` as it is in `.env` file suffixed by `/zoho/oauth2callback`
+for ex. `https://asciisd.com/zoho/oauth2callback`
+
+#### Then, follow the next steps:
 1. Go to [Zoho CRM Developer Console](https://accounts.zoho.com/developerconsole).
 2. ADD CLIENT `Server-based Applications`.
 3. Enter Client Name `Any name you want`
