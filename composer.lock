@@ -3966,21 +3966,21 @@
         },
         {
             "name": "zohocrm/php-sdk-archive",
-            "version": "2.2.4",
+            "version": "2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aemaddin/zcrm-php-sdk.git",
-                "reference": "2f4dc1209df58391e75fe34032b3209870531cd3"
+                "reference": "4e1464b2325a73d0f979c20c0753882e1b0bccd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aemaddin/zcrm-php-sdk/zipball/2f4dc1209df58391e75fe34032b3209870531cd3",
-                "reference": "2f4dc1209df58391e75fe34032b3209870531cd3",
+                "url": "https://api.github.com/repos/aemaddin/zcrm-php-sdk/zipball/4e1464b2325a73d0f979c20c0753882e1b0bccd4",
+                "reference": "4e1464b2325a73d0f979c20c0753882e1b0bccd4",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": "^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^8.0|^9.0"
@@ -4002,9 +4002,9 @@
             "description": "Zoho CRM API SDK for PHP",
             "homepage": "https://github.com/zoho/zcrm-php-sdk",
             "support": {
-                "source": "https://github.com/aemaddin/zcrm-php-sdk/tree/2.2.4"
+                "source": "https://github.com/aemaddin/zcrm-php-sdk/tree/2.2.5"
             },
-            "time": "2022-09-18T21:34:16+00:00"
+            "time": "2022-09-18T23:57:44+00:00"
         }
     ],
     "packages-dev": [
