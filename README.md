@@ -6,6 +6,8 @@
 
 This package used to integrate with the new Zoho CRM
 
+> For a new package please visit - [ZohoV3](https://github.com/asciisd/zoho-v3)
+
 ## Requirements
 
 * Get yourself a [Zoho CRM account](https://www.zoho.com/crm/).

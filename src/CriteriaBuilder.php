@@ -8,15 +8,15 @@ use Asciisd\Zoho\Facades\ZohoManager;
 
 class CriteriaBuilder
 {
-    protected $criteria;
-    protected $module;
-    protected $operators = ['equals', 'starts_with'];
-    protected $page = 1;
-    protected $perPage = 200;
+    protected string $criteria = '';
+    protected ZohoModule $module;
+    protected array $operators = ['equals', 'starts_with'];
+    protected int $page = 1;
+    protected int $perPage = 200;
 
     public function __construct($module)
     {
-        $this->module = $module ?? ZohoManager::useModule('leads');
+        $this->module = $module ?? ZohoManager::useModule();
     }
 
     /**
@@ -25,32 +25,32 @@ class CriteriaBuilder
      * @param $field
      * @param $value
      * @param  string  $operator
+     * @param  null  $module
      *
      * @return $this
      */
-    public static function where($field, $value, $operator = 'equals', $module = null)
+    public static function where($field, $value, string $operator = 'equals', $module = null): CriteriaBuilder|static
     {
         $builder = new CriteriaBuilder($module);
 
-        $builder->criteria = "";
-        $builder->criteria .= static::queryBuilder($field, $operator, $value);
+        $builder->criteria = static::queryBuilder($field, $operator, $value);
 
         return $builder;
     }
 
-    private static function queryBuilder(...$args)
+    private static function queryBuilder(...$args): string
     {
         return "($args[0]:$args[1]:$args[2])";
     }
 
-    public function startsWith($field, $value, $operator = 'starts_with')
+    public function startsWith($field, $value, $operator = 'starts_with'): static
     {
         $this->criteria .= ' and '.$this->queryBuilder($field, $operator, $value);
 
         return $this;
     }
 
-    public function andWhere($field, $value, $operator = 'equals')
+    public function andWhere($field, $value, $operator = 'equals'): static
     {
         $this->criteria .= ' and '.$this->queryBuilder($field, $operator,
                 $value);
@@ -58,14 +58,14 @@ class CriteriaBuilder
         return $this;
     }
 
-    public function orWhere($field, $value, $operator = 'equals')
+    public function orWhere($field, $value, $operator = 'equals'): static
     {
         $this->criteria .= ' or '.$this->queryBuilder($field, $operator, $value);
 
         return $this;
     }
 
-    public function toString()
+    public function toString(): string
     {
         return $this->getCriteria() ?? '';
     }
@@ -75,28 +75,28 @@ class CriteriaBuilder
         return $this->criteria;
     }
 
-    public function page($page)
+    public function page($page): static
     {
         $this->page = $page;
 
         return $this;
     }
 
-    public function perPage($per_page)
+    public function perPage($per_page): static
     {
         $this->perPage = $per_page;
 
         return $this;
     }
 
-    public function get()
+    public function get(): array
     {
         return $this->module->searchRecordsByCriteria(
             $this->getCriteria(), $this->page, $this->perPage
         );
     }
 
-    public function search()
+    public function search(): array
     {
         return $this->get();
     }
