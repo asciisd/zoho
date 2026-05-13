@@ -108,6 +108,30 @@ $clone = Zoho::contacts()->clone('5344xxxxxxxxxxxx');
 $count = Zoho::contacts()->count();
 ```
 
+## Module-Specific Behavior
+
+### Calls — `Call_Duration` normalization
+
+`ZohoCall` overrides `create`, `update`, `upsert`, and `updateMultiple` to normalize `Call_Duration` before sending. Zoho's Calls API expects `"HH:mm:ss"`, but the package accepts:
+
+- **Bare numbers as minutes** — `30` or `"30"` → `"00:30:00"`, `90` → `"01:30:00"`, `125` → `"02:05:00"`
+- **`"HH:mm:ss"` strings** — passed through unchanged
+- **`"mm:ss"` strings** — promoted to `"00:mm:ss"` (the colon makes intent explicit, so the second segment stays seconds)
+- **`null`, empty string, or non-numeric input** — passed through unchanged
+
+```php
+// Logging a 30-minute call against a Lead
+Zoho::calls()->create([
+    'Subject'       => 'Discovery call',
+    'Call_Type'     => 'Outbound',
+    'Call_Duration' => 30,                 // sent as "00:30:00"
+    'Who_Id'        => $leadId,
+    '$se_module'    => 'Leads',
+]);
+```
+
+Other modules pass payloads through unchanged — only `Calls` has this transformation.
+
 ## Search Operations
 
 ```php
