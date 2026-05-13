@@ -46,16 +46,16 @@ class ZohoCallTest extends TestCase
             '$se_module' => 'Leads',
         ]);
 
-        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:30:00');
+        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:30');
     }
 
-    public function test_create_converts_numeric_string_minutes_to_hms(): void
+    public function test_create_converts_numeric_string_minutes_to_hm(): void
     {
         $this->fakeCallsCreate();
 
         ZohoCall::create(['Call_Duration' => '30']);
 
-        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:30:00');
+        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:30');
     }
 
     public function test_create_handles_minutes_over_one_hour(): void
@@ -64,25 +64,25 @@ class ZohoCallTest extends TestCase
 
         ZohoCall::create(['Call_Duration' => 125]);
 
-        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '02:05:00');
+        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '02:05');
     }
 
-    public function test_create_passes_through_already_formatted_hms(): void
+    public function test_create_strips_seconds_from_hms_input(): void
     {
         $this->fakeCallsCreate();
 
         ZohoCall::create(['Call_Duration' => '01:02:05']);
 
-        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '01:02:05');
+        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '01:02');
     }
 
-    public function test_create_promotes_mm_ss_to_hh_mm_ss(): void
+    public function test_create_promotes_single_segment_to_hh_mm(): void
     {
         $this->fakeCallsCreate();
 
         ZohoCall::create(['Call_Duration' => '5:30']);
 
-        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:05:30');
+        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:05');
     }
 
     public function test_create_leaves_field_alone_when_not_provided(): void
@@ -111,7 +111,7 @@ class ZohoCallTest extends TestCase
 
             return $request->method() === 'PUT'
                 && $row['id'] === '999'
-                && $row['Call_Duration'] === '01:30:00';
+                && $row['Call_Duration'] === '01:30';
         });
     }
 
@@ -125,7 +125,7 @@ class ZohoCallTest extends TestCase
 
         ZohoCall::upsert(['Call_Duration' => 45], ['Subject']);
 
-        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:45:00');
+        Http::assertSent(fn ($request) => $request->data()['data'][0]['Call_Duration'] === '00:45');
     }
 
     public function test_update_multiple_normalizes_each_record(): void
@@ -147,8 +147,8 @@ class ZohoCallTest extends TestCase
         Http::assertSent(function ($request) {
             $rows = $request->data()['data'];
 
-            return $rows[0]['Call_Duration'] === '00:30:00'
-                && $rows[1]['Call_Duration'] === '00:02:15';
+            return $rows[0]['Call_Duration'] === '00:30'
+                && $rows[1]['Call_Duration'] === '00:02';
         });
     }
 }

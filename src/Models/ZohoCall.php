@@ -44,19 +44,20 @@ class ZohoCall extends ZohoModel
             return $value;
         }
 
+        // Zoho CRM API v8 expects Call_Duration in "HH:mm" format (no seconds).
         if (is_string($value) && preg_match('/^(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?$/', $value, $m)) {
             if (isset($m[3])) {
-                return sprintf('%02d:%02d:%02d', (int) $m[1], (int) $m[2], (int) $m[3]);
+                return sprintf('%02d:%02d', (int) $m[1], (int) $m[2]);
             }
 
-            return sprintf('00:%02d:%02d', (int) $m[1], (int) $m[2]);
+            return sprintf('00:%02d', (int) $m[1]);
         }
 
         if (is_numeric($value)) {
             $minutes = max(0, (int) $value);
 
             return sprintf(
-                '%02d:%02d:00',
+                '%02d:%02d',
                 intdiv($minutes, 60),
                 $minutes % 60
             );
