@@ -20,7 +20,7 @@ Use this skill when:
 ## Package Structure
 
 ```
-Asciisd\ZohoV8\
+Asciisd\Zoho\
 ├── Facades\Zoho              # Facade for ZohoClient
 ├── ZohoClient                # Factory for module instances
 ├── Models\
@@ -51,7 +51,7 @@ Asciisd\ZohoV8\
 Always use the `Zoho` facade to access CRM modules:
 
 ```php
-use Asciisd\ZohoV8\Facades\Zoho;
+use Asciisd\Zoho\Facades\Zoho;
 
 $contacts = Zoho::contacts();
 $leads    = Zoho::leads();
@@ -68,7 +68,7 @@ $invoices = Zoho::invoices();
 You can also use module classes directly:
 
 ```php
-use Asciisd\ZohoV8\Models\ZohoContact;
+use Asciisd\Zoho\Models\ZohoContact;
 
 $contact = ZohoContact::find('record_id');
 ```
@@ -185,7 +185,7 @@ The `SyncsWithZoho` trait auto-syncs Eloquent models to Zoho CRM via queued jobs
 ### Required implementation
 
 ```php
-use Asciisd\ZohoV8\Traits\SyncsWithZoho;
+use Asciisd\Zoho\Traits\SyncsWithZoho;
 
 class Customer extends Model
 {
@@ -262,7 +262,7 @@ class Property extends Model
 The custom ZohoModel class extends `ZohoModel` and sets `MODULE_API_NAME`:
 
 ```php
-use Asciisd\ZohoV8\Models\ZohoModel;
+use Asciisd\Zoho\Models\ZohoModel;
 
 class ZohoPropertyListing extends ZohoModel
 {
@@ -329,7 +329,7 @@ Customer::withoutZohoSync(function () {
 The `zoho_syncs` table stores polymorphic relationships between Eloquent models and Zoho records. The `ZohoSync` model provides scopes:
 
 ```php
-use Asciisd\ZohoV8\Models\ZohoSync;
+use Asciisd\Zoho\Models\ZohoSync;
 
 ZohoSync::forModule('Contacts')->get();
 ZohoSync::withZohoRecordId('5344xxxx')->first();
@@ -349,10 +349,10 @@ Routes are registered automatically:
 
 ```php
 // In EventServiceProvider or a listener
-use Asciisd\ZohoV8\Events\ZohoWebhookReceived;
-use Asciisd\ZohoV8\Events\ZohoRecordCreated;
-use Asciisd\ZohoV8\Events\ZohoRecordUpdated;
-use Asciisd\ZohoV8\Events\ZohoRecordDeleted;
+use Asciisd\Zoho\Events\ZohoWebhookReceived;
+use Asciisd\Zoho\Events\ZohoRecordCreated;
+use Asciisd\Zoho\Events\ZohoRecordUpdated;
+use Asciisd\Zoho\Events\ZohoRecordDeleted;
 
 // Generic webhook event
 Event::listen(ZohoWebhookReceived::class, function ($event) {
@@ -431,9 +431,9 @@ Key settings in `config/zoho.php`:
 The package provides typed exceptions:
 
 ```php
-use Asciisd\ZohoV8\Exceptions\ZohoApiException;
-use Asciisd\ZohoV8\Exceptions\ZohoAuthException;
-use Asciisd\ZohoV8\Exceptions\ZohoTokenException;
+use Asciisd\Zoho\Exceptions\ZohoApiException;
+use Asciisd\Zoho\Exceptions\ZohoAuthException;
+use Asciisd\Zoho\Exceptions\ZohoTokenException;
 
 try {
     $contact = Zoho::contacts()->find('invalid_id');

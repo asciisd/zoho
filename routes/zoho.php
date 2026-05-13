@@ -1,6 +1,6 @@
 <?php
 
-use Asciisd\ZohoV8\Http\Controllers\ZohoWebhookController;
+use Asciisd\Zoho\Http\Controllers\ZohoWebhookController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -1,11 +1,11 @@
 <?php
 
-namespace Asciisd\ZohoV8\Console;
+namespace Asciisd\Zoho\Console;
 
-use Asciisd\ZohoV8\Models\ZohoAccount;
-use Asciisd\ZohoV8\Models\ZohoContact;
-use Asciisd\ZohoV8\Models\ZohoDeal;
-use Asciisd\ZohoV8\Models\ZohoLead;
+use Asciisd\Zoho\Models\ZohoAccount;
+use Asciisd\Zoho\Models\ZohoContact;
+use Asciisd\Zoho\Models\ZohoDeal;
+use Asciisd\Zoho\Models\ZohoLead;
 use Illuminate\Console\Command;
 
 class ZohoSyncCommand extends Command

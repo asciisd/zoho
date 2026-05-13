@@ -1,12 +1,12 @@
 <?php
 
-namespace Asciisd\ZohoV8;
+namespace Asciisd\Zoho;
 
-use Asciisd\ZohoV8\Console\ZohoAuthCommand;
-use Asciisd\ZohoV8\Console\ZohoRefreshTokenCommand;
-use Asciisd\ZohoV8\Console\ZohoSetupCommand;
-use Asciisd\ZohoV8\Console\ZohoSyncCommand;
-use Asciisd\ZohoV8\Console\ZohoTestCommand;
+use Asciisd\Zoho\Console\ZohoAuthCommand;
+use Asciisd\Zoho\Console\ZohoRefreshTokenCommand;
+use Asciisd\Zoho\Console\ZohoSetupCommand;
+use Asciisd\Zoho\Console\ZohoSyncCommand;
+use Asciisd\Zoho\Console\ZohoTestCommand;
 use Illuminate\Support\ServiceProvider;
 
 class ZohoServiceProvider extends ServiceProvider

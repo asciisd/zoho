@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Jobs;
+namespace Asciisd\Zoho\Jobs;
 
-use Asciisd\ZohoV8\Models\ZohoSync;
+use Asciisd\Zoho\Models\ZohoSync;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
@@ -208,7 +208,7 @@ class SyncModelToZoho implements ShouldQueue
      * Resolution order:
      * 1. Model's getZohoModelClass() method (explicit override)
      * 2. Config map at zoho.modules.{Module_Name}
-     * 3. Naming convention: "Contacts" -> Asciisd\ZohoV8\Models\ZohoContact
+     * 3. Naming convention: "Contacts" -> Asciisd\Zoho\Models\ZohoContact
      */
     protected function resolveZohoModelClass(Model $model, string $module): string
     {
@@ -236,6 +236,6 @@ class SyncModelToZoho implements ShouldQueue
     {
         $className = 'Zoho'.rtrim($module, 's');
 
-        return "Asciisd\\ZohoV8\\Models\\{$className}";
+        return "Asciisd\\Zoho\\Models\\{$className}";
     }
 }

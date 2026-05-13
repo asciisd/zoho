@@ -1,9 +1,9 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Storage;
+namespace Asciisd\Zoho\Tests\Unit\Storage;
 
-use Asciisd\ZohoV8\Storage\TokenStorage;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Storage\TokenStorage;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Facades\Cache;
 
 class TokenStorageTest extends TestCase

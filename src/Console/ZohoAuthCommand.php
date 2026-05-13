@@ -1,6 +1,6 @@
 <?php
 
-namespace Asciisd\ZohoV8\Console;
+namespace Asciisd\Zoho\Console;
 
 use Illuminate\Console\Command;
 

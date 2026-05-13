@@ -1,6 +1,6 @@
 <?php
 
-namespace Asciisd\ZohoV8\Exceptions;
+namespace Asciisd\Zoho\Exceptions;
 
 class ZohoTokenException extends ZohoException
 {

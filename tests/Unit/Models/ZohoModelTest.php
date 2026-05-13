@@ -1,10 +1,10 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Models;
+namespace Asciisd\Zoho\Tests\Unit\Models;
 
-use Asciisd\ZohoV8\Exceptions\ZohoApiException;
-use Asciisd\ZohoV8\Models\ZohoContact;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Exceptions\ZohoApiException;
+use Asciisd\Zoho\Models\ZohoContact;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 

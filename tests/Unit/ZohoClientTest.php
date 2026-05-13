@@ -1,19 +1,19 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit;
+namespace Asciisd\Zoho\Tests\Unit;
 
-use Asciisd\ZohoV8\Models\ZohoAccount;
-use Asciisd\ZohoV8\Models\ZohoCall;
-use Asciisd\ZohoV8\Models\ZohoContact;
-use Asciisd\ZohoV8\Models\ZohoDeal;
-use Asciisd\ZohoV8\Models\ZohoEvent;
-use Asciisd\ZohoV8\Models\ZohoInvoice;
-use Asciisd\ZohoV8\Models\ZohoLead;
-use Asciisd\ZohoV8\Models\ZohoNote;
-use Asciisd\ZohoV8\Models\ZohoProduct;
-use Asciisd\ZohoV8\Models\ZohoTask;
-use Asciisd\ZohoV8\Tests\TestCase;
-use Asciisd\ZohoV8\ZohoClient;
+use Asciisd\Zoho\Models\ZohoAccount;
+use Asciisd\Zoho\Models\ZohoCall;
+use Asciisd\Zoho\Models\ZohoContact;
+use Asciisd\Zoho\Models\ZohoDeal;
+use Asciisd\Zoho\Models\ZohoEvent;
+use Asciisd\Zoho\Models\ZohoInvoice;
+use Asciisd\Zoho\Models\ZohoLead;
+use Asciisd\Zoho\Models\ZohoNote;
+use Asciisd\Zoho\Models\ZohoProduct;
+use Asciisd\Zoho\Models\ZohoTask;
+use Asciisd\Zoho\Tests\TestCase;
+use Asciisd\Zoho\ZohoClient;
 
 class ZohoClientTest extends TestCase
 {

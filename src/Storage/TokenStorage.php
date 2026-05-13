@@ -1,9 +1,9 @@
 <?php
 
-namespace Asciisd\ZohoV8\Storage;
+namespace Asciisd\Zoho\Storage;
 
-use Asciisd\ZohoV8\Exceptions\ZohoTokenException;
-use Asciisd\ZohoV8\Models\ZohoOAuthToken;
+use Asciisd\Zoho\Exceptions\ZohoTokenException;
+use Asciisd\Zoho\Models\ZohoOAuthToken;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 

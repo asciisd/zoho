@@ -1,4 +1,4 @@
-## Zoho CRM for Laravel (asciisd/zoho-v8)
+## Zoho CRM for Laravel (asciisd/zoho)
 
 This package provides a fluent Laravel wrapper for the Zoho CRM API v8. It offers model-style classes for CRM modules, OAuth token management, automatic field detection, CRUD/search/upsert operations, webhook handling, and bi-directional Eloquent model sync.
 
@@ -6,7 +6,7 @@ This package provides a fluent Laravel wrapper for the Zoho CRM API v8. It offer
 
 - Access Zoho CRM modules via the `Zoho` facade: `Zoho::contacts()`, `Zoho::leads()`, `Zoho::deals()`, etc.
 - Each module method returns a dedicated model class (e.g., `ZohoContact`, `ZohoLead`) that exposes static CRUD methods.
-- All module model classes extend `Asciisd\ZohoV8\Models\ZohoModel`.
+- All module model classes extend `Asciisd\Zoho\Models\ZohoModel`.
 - Configuration lives in `config/zoho.php` and uses `ZOHO_*` environment variables.
 - OAuth tokens are managed automatically via `OAuthManager` and stored in cache, database, or both.
 - Use `php artisan zoho:setup` for initial OAuth configuration.
@@ -32,7 +32,7 @@ Zoho::invoices();   // Invoices module
 
 @verbatim
 <code-snippet name="Basic CRUD operations" lang="php">
-use Asciisd\ZohoV8\Facades\Zoho;
+use Asciisd\Zoho\Facades\Zoho;
 
 // Create
 $contact = Zoho::contacts()->create([
@@ -69,7 +69,7 @@ Use the `SyncsWithZoho` trait on Eloquent models to automatically sync them to Z
 
 @verbatim
 <code-snippet name="Eloquent model sync with SyncsWithZoho trait" lang="php">
-use Asciisd\ZohoV8\Traits\SyncsWithZoho;
+use Asciisd\Zoho\Traits\SyncsWithZoho;
 
 class Customer extends Model
 {

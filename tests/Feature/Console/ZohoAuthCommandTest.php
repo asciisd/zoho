@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Feature\Console;
+namespace Asciisd\Zoho\Tests\Feature\Console;
 
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Facades\Http;
 
 class ZohoAuthCommandTest extends TestCase

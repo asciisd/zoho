@@ -1,10 +1,10 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Models;
+namespace Asciisd\Zoho\Tests\Unit\Models;
 
-use Asciisd\ZohoV8\Models\ZohoSync;
-use Asciisd\ZohoV8\Tests\Mocks\TestCustomer;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Models\ZohoSync;
+use Asciisd\Zoho\Tests\Mocks\TestCustomer;
+use Asciisd\Zoho\Tests\TestCase;
 
 class ZohoSyncTest extends TestCase
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Jobs;
+namespace Asciisd\Zoho\Tests\Unit\Jobs;
 
-use Asciisd\ZohoV8\Jobs\SyncModelToZoho;
-use Asciisd\ZohoV8\Models\ZohoContact;
-use Asciisd\ZohoV8\Models\ZohoSync;
-use Asciisd\ZohoV8\Tests\Mocks\TestCustomer;
-use Asciisd\ZohoV8\Tests\Mocks\TestCustomModuleCustomer;
-use Asciisd\ZohoV8\Tests\Mocks\ZohoPropertyListing;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Jobs\SyncModelToZoho;
+use Asciisd\Zoho\Models\ZohoContact;
+use Asciisd\Zoho\Models\ZohoSync;
+use Asciisd\Zoho\Tests\Mocks\TestCustomer;
+use Asciisd\Zoho\Tests\Mocks\TestCustomModuleCustomer;
+use Asciisd\Zoho\Tests\Mocks\ZohoPropertyListing;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -244,17 +244,17 @@ class SyncModelToZohoTest extends TestCase
         $reflection->setAccessible(true);
 
         $this->assertEquals(
-            'Asciisd\ZohoV8\Models\ZohoContact',
+            'Asciisd\Zoho\Models\ZohoContact',
             $reflection->invoke($job, 'Contacts')
         );
 
         $this->assertEquals(
-            'Asciisd\ZohoV8\Models\ZohoLead',
+            'Asciisd\Zoho\Models\ZohoLead',
             $reflection->invoke($job, 'Leads')
         );
 
         $this->assertEquals(
-            'Asciisd\ZohoV8\Models\ZohoDeal',
+            'Asciisd\Zoho\Models\ZohoDeal',
             $reflection->invoke($job, 'Deals')
         );
     }

@@ -1,6 +1,46 @@
 # Changelog
 
-All notable changes to `zoho-v8` will be documented in this file.
+All notable changes to `asciisd/zoho` will be documented in this file.
+
+## 8.0.0 - 2026-05-13
+
+### Breaking Changes
+
+This is a complete rewrite of the package. If upgrading from v2.x, see [UPGRADE.md](UPGRADE.md) for a full migration guide.
+
+- **Package renamed** from `asciisd/zoho-v8` to `asciisd/zoho` (replaces the legacy v2.x package)
+- **Namespace changed** from `Asciisd\ZohoV8\` to `Asciisd\Zoho\`
+- **Removed official SDK dependency** — no longer requires `zohocrm/php-sdk-8.0`; uses Laravel HTTP client directly
+- **PHP 8.4+ required** (up from 7.2 in v2.x)
+- **Laravel 11+ required** (up from 6.x in v2.x)
+- **Architecture overhaul** — replaces `ZohoManager` facade with static ZohoModel classes and `SyncsWithZoho` trait
+- Old `Zohoable` base model replaced by `SyncsWithZoho` trait (composable, works with any Eloquent model)
+- Old `CriteriaBuilder` replaced by direct criteria string format
+
+### Added
+
+- Static ZohoModel classes: `ZohoContact`, `ZohoLead`, `ZohoDeal`, `ZohoAccount`, `ZohoProduct`, `ZohoInvoice`, `ZohoEvent`, `ZohoTask`, `ZohoCall`, `ZohoNote`
+- Full CRUD via static methods: `::create()`, `::find()`, `::update()`, `::delete()`, `::search()`, `::upsert()`
+- `SyncsWithZoho` trait for automatic Eloquent model synchronization via queued jobs
+- Polymorphic `ZohoSync` model for tracking Zoho record IDs per model
+- Custom module support with 3-step resolution chain (model method, config map, naming convention)
+- Automatic field detection — dynamically fetches and caches module field names
+- Comprehensive Artisan commands: `zoho:setup`, `zoho:auth`, `zoho:test`, `zoho:sync`, `zoho:token:refresh`
+- Webhook support with typed Laravel events (`ZohoRecordCreated`, `ZohoRecordUpdated`, `ZohoRecordDeleted`)
+- Hybrid token storage (cache + database) with automatic refresh
+- Support for all Zoho CRM data centers (US, EU, IN, CN, JP, AU, CA)
+- Batch operations (`updateMultiple`, `deleteMultiple`)
+- Lead conversion, record cloning, record count
+- Related records support
+- Typed exceptions: `ZohoApiException`, `ZohoAuthException`, `ZohoTokenException`
+
+### Removed
+
+- `zohocrm/php-sdk-8.0` dependency (direct HTTP calls via Laravel `Http` facade)
+- `ZohoManager` facade (replaced by `Zoho` facade with module accessors)
+- `Zohoable` abstract model (replaced by `SyncsWithZoho` trait)
+- `CriteriaBuilder` class (use criteria strings directly)
+- `zoho:authentication` command (replaced by `zoho:setup`)
 
 ## 1.2.1 - 2026-03-13
 

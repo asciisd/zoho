@@ -1,9 +1,9 @@
 <?php
 
-namespace Asciisd\ZohoV8\Traits;
+namespace Asciisd\Zoho\Traits;
 
-use Asciisd\ZohoV8\Jobs\SyncModelToZoho;
-use Asciisd\ZohoV8\Models\ZohoSync;
+use Asciisd\Zoho\Jobs\SyncModelToZoho;
+use Asciisd\Zoho\Models\ZohoSync;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 trait SyncsWithZoho

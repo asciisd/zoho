@@ -1,9 +1,9 @@
 # Zoho CRM Laravel Package (API v8)
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/asciisd/zoho-v8?style=flat-square)](https://packagist.org/packages/asciisd/zoho-v8)
-[![Total Downloads](https://img.shields.io/packagist/dt/asciisd/zoho-v8?style=flat-square)](https://packagist.org/packages/asciisd/zoho-v8)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/asciisd/zoho?style=flat-square)](https://packagist.org/packages/asciisd/zoho)
+[![Total Downloads](https://img.shields.io/packagist/dt/asciisd/zoho?style=flat-square)](https://packagist.org/packages/asciisd/zoho)
 
-A minimal and elegant Laravel wrapper for Zoho CRM PHP SDK 8.0. This package provides a clean, Laravel-style interface for interacting with Zoho CRM API v8 with model-like classes, automatic token management, and webhook support.
+A minimal and elegant Laravel wrapper for Zoho CRM API v8. This package provides a clean, Laravel-style interface for interacting with Zoho CRM with model-like classes, automatic token management, and webhook support.
 
 ## Features
 
@@ -28,7 +28,7 @@ A minimal and elegant Laravel wrapper for Zoho CRM PHP SDK 8.0. This package pro
 Install the package via Composer:
 
 ```bash
-composer require asciisd/zoho-v8
+composer require asciisd/zoho
 ```
 
 ### Publish Configuration
@@ -164,7 +164,7 @@ This interactive command will:
 #### Create a Contact
 
 ```php
-use Asciisd\ZohoV8\Models\ZohoContact;
+use Asciisd\Zoho\Models\ZohoContact;
 
 $contact = ZohoContact::create([
     'First_Name' => 'John',
@@ -253,7 +253,7 @@ All modules extend the base `ZohoModel` class and support the same methods.
 You can also use the `Zoho` facade for a fluent interface:
 
 ```php
-use Asciisd\ZohoV8\Facades\Zoho;
+use Asciisd\Zoho\Facades\Zoho;
 
 // Create a contact
 $contact = Zoho::contacts()->create([...]);
@@ -439,10 +439,10 @@ php artisan zoho:token:refresh --clear-cache
 Listen to webhook events in your application:
 
 ```php
-use Asciisd\ZohoV8\Events\ZohoRecordCreated;
-use Asciisd\ZohoV8\Events\ZohoRecordUpdated;
-use Asciisd\ZohoV8\Events\ZohoRecordDeleted;
-use Asciisd\ZohoV8\Events\ZohoWebhookReceived;
+use Asciisd\Zoho\Events\ZohoRecordCreated;
+use Asciisd\Zoho\Events\ZohoRecordUpdated;
+use Asciisd\Zoho\Events\ZohoRecordDeleted;
+use Asciisd\Zoho\Events\ZohoWebhookReceived;
 
 // Listen to all webhooks
 Event::listen(ZohoWebhookReceived::class, function ($event) {
@@ -509,7 +509,7 @@ This will create the `zoho_syncs` table to store the relationship between your L
 Add the `SyncsWithZoho` trait to any model and define the `getZohoModule()` method:
 
 ```php
-use Asciisd\ZohoV8\Traits\SyncsWithZoho;
+use Asciisd\Zoho\Traits\SyncsWithZoho;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -581,7 +581,7 @@ class User extends Authenticatable
 Here's how to sync a `DemoAccount` model with Zoho CRM `Leads`:
 
 ```php
-use Asciisd\ZohoV8\Traits\SyncsWithZoho;
+use Asciisd\Zoho\Traits\SyncsWithZoho;
 use Illuminate\Database\Eloquent\Model;
 
 class DemoAccount extends Model
@@ -781,10 +781,10 @@ return [
 The package provides custom exceptions for better error handling:
 
 ```php
-use Asciisd\ZohoV8\Exceptions\ZohoException;
-use Asciisd\ZohoV8\Exceptions\ZohoAuthException;
-use Asciisd\ZohoV8\Exceptions\ZohoApiException;
-use Asciisd\ZohoV8\Exceptions\ZohoTokenException;
+use Asciisd\Zoho\Exceptions\ZohoException;
+use Asciisd\Zoho\Exceptions\ZohoAuthException;
+use Asciisd\Zoho\Exceptions\ZohoApiException;
+use Asciisd\Zoho\Exceptions\ZohoTokenException;
 
 try {
     $contact = ZohoContact::find('invalid_id');

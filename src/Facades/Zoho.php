@@ -1,22 +1,22 @@
 <?php
 
-namespace Asciisd\ZohoV8\Facades;
+namespace Asciisd\Zoho\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \Asciisd\ZohoV8\Models\ZohoContact contacts()
- * @method static \Asciisd\ZohoV8\Models\ZohoAccount accounts()
- * @method static \Asciisd\ZohoV8\Models\ZohoLead leads()
- * @method static \Asciisd\ZohoV8\Models\ZohoDeal deals()
- * @method static \Asciisd\ZohoV8\Models\ZohoTask tasks()
- * @method static \Asciisd\ZohoV8\Models\ZohoEvent events()
- * @method static \Asciisd\ZohoV8\Models\ZohoCall calls()
- * @method static \Asciisd\ZohoV8\Models\ZohoNote notes()
- * @method static \Asciisd\ZohoV8\Models\ZohoProduct products()
- * @method static \Asciisd\ZohoV8\Models\ZohoInvoice invoices()
+ * @method static \Asciisd\Zoho\Models\ZohoContact contacts()
+ * @method static \Asciisd\Zoho\Models\ZohoAccount accounts()
+ * @method static \Asciisd\Zoho\Models\ZohoLead leads()
+ * @method static \Asciisd\Zoho\Models\ZohoDeal deals()
+ * @method static \Asciisd\Zoho\Models\ZohoTask tasks()
+ * @method static \Asciisd\Zoho\Models\ZohoEvent events()
+ * @method static \Asciisd\Zoho\Models\ZohoCall calls()
+ * @method static \Asciisd\Zoho\Models\ZohoNote notes()
+ * @method static \Asciisd\Zoho\Models\ZohoProduct products()
+ * @method static \Asciisd\Zoho\Models\ZohoInvoice invoices()
  *
- * @see \Asciisd\ZohoV8\ZohoClient
+ * @see \Asciisd\Zoho\ZohoClient
  */
 class Zoho extends Facade
 {

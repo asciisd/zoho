@@ -1,6 +1,6 @@
 <?php
 
-namespace Asciisd\ZohoV8\Models;
+namespace Asciisd\Zoho\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;

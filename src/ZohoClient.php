@@ -1,17 +1,17 @@
 <?php
 
-namespace Asciisd\ZohoV8;
+namespace Asciisd\Zoho;
 
-use Asciisd\ZohoV8\Models\ZohoAccount;
-use Asciisd\ZohoV8\Models\ZohoCall;
-use Asciisd\ZohoV8\Models\ZohoContact;
-use Asciisd\ZohoV8\Models\ZohoDeal;
-use Asciisd\ZohoV8\Models\ZohoEvent;
-use Asciisd\ZohoV8\Models\ZohoInvoice;
-use Asciisd\ZohoV8\Models\ZohoLead;
-use Asciisd\ZohoV8\Models\ZohoNote;
-use Asciisd\ZohoV8\Models\ZohoProduct;
-use Asciisd\ZohoV8\Models\ZohoTask;
+use Asciisd\Zoho\Models\ZohoAccount;
+use Asciisd\Zoho\Models\ZohoCall;
+use Asciisd\Zoho\Models\ZohoContact;
+use Asciisd\Zoho\Models\ZohoDeal;
+use Asciisd\Zoho\Models\ZohoEvent;
+use Asciisd\Zoho\Models\ZohoInvoice;
+use Asciisd\Zoho\Models\ZohoLead;
+use Asciisd\Zoho\Models\ZohoNote;
+use Asciisd\Zoho\Models\ZohoProduct;
+use Asciisd\Zoho\Models\ZohoTask;
 
 class ZohoClient
 {

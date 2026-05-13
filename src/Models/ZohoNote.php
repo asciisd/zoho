@@ -1,6 +1,6 @@
 <?php
 
-namespace Asciisd\ZohoV8\Models;
+namespace Asciisd\Zoho\Models;
 
 class ZohoNote extends ZohoModel
 {

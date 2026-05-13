@@ -1,11 +1,11 @@
 <?php
 
-namespace Asciisd\ZohoV8\Http\Controllers;
+namespace Asciisd\Zoho\Http\Controllers;
 
-use Asciisd\ZohoV8\Events\ZohoRecordCreated;
-use Asciisd\ZohoV8\Events\ZohoRecordDeleted;
-use Asciisd\ZohoV8\Events\ZohoRecordUpdated;
-use Asciisd\ZohoV8\Events\ZohoWebhookReceived;
+use Asciisd\Zoho\Events\ZohoRecordCreated;
+use Asciisd\Zoho\Events\ZohoRecordDeleted;
+use Asciisd\Zoho\Events\ZohoRecordUpdated;
+use Asciisd\Zoho\Events\ZohoWebhookReceived;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Exceptions;
+namespace Asciisd\Zoho\Tests\Unit\Exceptions;
 
-use Asciisd\ZohoV8\Exceptions\ZohoApiException;
-use Asciisd\ZohoV8\Exceptions\ZohoAuthException;
-use Asciisd\ZohoV8\Exceptions\ZohoException;
-use Asciisd\ZohoV8\Exceptions\ZohoTokenException;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Exceptions\ZohoApiException;
+use Asciisd\Zoho\Exceptions\ZohoAuthException;
+use Asciisd\Zoho\Exceptions\ZohoException;
+use Asciisd\Zoho\Exceptions\ZohoTokenException;
+use Asciisd\Zoho\Tests\TestCase;
 
 class ExceptionsTest extends TestCase
 {

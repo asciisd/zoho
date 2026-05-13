@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Mocks;
+namespace Asciisd\Zoho\Tests\Mocks;
 
-use Asciisd\ZohoV8\Traits\SyncsWithZoho;
+use Asciisd\Zoho\Traits\SyncsWithZoho;
 use Illuminate\Database\Eloquent\Model;
 
 class TestCustomModuleCustomer extends Model

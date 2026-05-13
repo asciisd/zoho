@@ -1,11 +1,11 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Feature;
+namespace Asciisd\Zoho\Tests\Feature;
 
-use Asciisd\ZohoV8\Auth\OAuthManager;
-use Asciisd\ZohoV8\Storage\TokenStorage;
-use Asciisd\ZohoV8\Tests\TestCase;
-use Asciisd\ZohoV8\ZohoClient;
+use Asciisd\Zoho\Auth\OAuthManager;
+use Asciisd\Zoho\Storage\TokenStorage;
+use Asciisd\Zoho\Tests\TestCase;
+use Asciisd\Zoho\ZohoClient;
 
 class ZohoServiceProviderTest extends TestCase
 {
@@ -68,14 +68,14 @@ class ZohoServiceProviderTest extends TestCase
 
     public function test_facade_resolves_to_zoho_client(): void
     {
-        $client = \Asciisd\ZohoV8\Facades\Zoho::getFacadeRoot();
+        $client = \Asciisd\Zoho\Facades\Zoho::getFacadeRoot();
 
         $this->assertInstanceOf(ZohoClient::class, $client);
     }
 
     public function test_provides_returns_correct_services(): void
     {
-        $provider = app()->getProvider(\Asciisd\ZohoV8\ZohoServiceProvider::class);
+        $provider = app()->getProvider(\Asciisd\Zoho\ZohoServiceProvider::class);
 
         $provides = $provider->provides();
 

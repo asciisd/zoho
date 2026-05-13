@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests;
+namespace Asciisd\Zoho\Tests;
 
-use Asciisd\ZohoV8\ZohoServiceProvider;
+use Asciisd\Zoho\ZohoServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 abstract class TestCase extends OrchestraTestCase
@@ -17,7 +17,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app): array
     {
         return [
-            'Zoho' => \Asciisd\ZohoV8\Facades\Zoho::class,
+            'Zoho' => \Asciisd\Zoho\Facades\Zoho::class,
         ];
     }
 

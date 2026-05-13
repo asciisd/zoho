@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Mocks;
+namespace Asciisd\Zoho\Tests\Mocks;
 
-use Asciisd\ZohoV8\Models\ZohoModel;
+use Asciisd\Zoho\Models\ZohoModel;
 
 class ZohoPropertyListing extends ZohoModel
 {

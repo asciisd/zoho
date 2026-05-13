@@ -1,6 +1,6 @@
 <?php
 
-namespace Asciisd\ZohoV8\Events;
+namespace Asciisd\Zoho\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

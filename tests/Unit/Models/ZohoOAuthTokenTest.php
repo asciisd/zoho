@@ -1,9 +1,9 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Models;
+namespace Asciisd\Zoho\Tests\Unit\Models;
 
-use Asciisd\ZohoV8\Models\ZohoOAuthToken;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Models\ZohoOAuthToken;
+use Asciisd\Zoho\Tests\TestCase;
 
 class ZohoOAuthTokenTest extends TestCase
 {

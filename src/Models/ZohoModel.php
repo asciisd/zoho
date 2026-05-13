@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Models;
+namespace Asciisd\Zoho\Models;
 
-use Asciisd\ZohoV8\Exceptions\ZohoApiException;
+use Asciisd\Zoho\Exceptions\ZohoApiException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;

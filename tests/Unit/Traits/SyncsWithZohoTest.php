@@ -1,14 +1,14 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Traits;
+namespace Asciisd\Zoho\Tests\Unit\Traits;
 
-use Asciisd\ZohoV8\Jobs\SyncModelToZoho;
-use Asciisd\ZohoV8\Models\ZohoSync;
-use Asciisd\ZohoV8\Tests\Mocks\TestCustomer;
-use Asciisd\ZohoV8\Tests\Mocks\TestCustomerNoMapping;
-use Asciisd\ZohoV8\Tests\Mocks\TestCustomModuleCustomer;
-use Asciisd\ZohoV8\Tests\Mocks\ZohoPropertyListing;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Jobs\SyncModelToZoho;
+use Asciisd\Zoho\Models\ZohoSync;
+use Asciisd\Zoho\Tests\Mocks\TestCustomer;
+use Asciisd\Zoho\Tests\Mocks\TestCustomerNoMapping;
+use Asciisd\Zoho\Tests\Mocks\TestCustomModuleCustomer;
+use Asciisd\Zoho\Tests\Mocks\ZohoPropertyListing;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Facades\Queue;
 
 class SyncsWithZohoTest extends TestCase

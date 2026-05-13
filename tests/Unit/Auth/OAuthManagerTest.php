@@ -1,10 +1,10 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Unit\Auth;
+namespace Asciisd\Zoho\Tests\Unit\Auth;
 
-use Asciisd\ZohoV8\Auth\OAuthManager;
-use Asciisd\ZohoV8\Exceptions\ZohoAuthException;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Auth\OAuthManager;
+use Asciisd\Zoho\Exceptions\ZohoAuthException;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Facades\Http;
 
 class OAuthManagerTest extends TestCase

@@ -1,8 +1,8 @@
 <?php
 
-namespace Asciisd\ZohoV8\Console;
+namespace Asciisd\Zoho\Console;
 
-use Asciisd\ZohoV8\Auth\OAuthManager;
+use Asciisd\Zoho\Auth\OAuthManager;
 use Illuminate\Console\Command;
 
 class ZohoSetupCommand extends Command

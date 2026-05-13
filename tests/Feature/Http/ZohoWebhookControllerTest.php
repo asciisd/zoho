@@ -1,12 +1,12 @@
 <?php
 
-namespace Asciisd\ZohoV8\Tests\Feature\Http;
+namespace Asciisd\Zoho\Tests\Feature\Http;
 
-use Asciisd\ZohoV8\Events\ZohoRecordCreated;
-use Asciisd\ZohoV8\Events\ZohoRecordDeleted;
-use Asciisd\ZohoV8\Events\ZohoRecordUpdated;
-use Asciisd\ZohoV8\Events\ZohoWebhookReceived;
-use Asciisd\ZohoV8\Tests\TestCase;
+use Asciisd\Zoho\Events\ZohoRecordCreated;
+use Asciisd\Zoho\Events\ZohoRecordDeleted;
+use Asciisd\Zoho\Events\ZohoRecordUpdated;
+use Asciisd\Zoho\Events\ZohoWebhookReceived;
+use Asciisd\Zoho\Tests\TestCase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 
