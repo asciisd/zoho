@@ -227,6 +227,19 @@ class ZohoModelTest extends TestCase
         $this->assertCount(1, $results);
     }
 
+    public function test_search_returns_empty_collection_on_no_content_response(): void
+    {
+        Http::fake([
+            '*/crm/v8/settings/fields*' => Http::response(['fields' => [['api_name' => 'id']]]),
+            '*/crm/v8/Contacts/search*' => Http::response(null, 204),
+        ]);
+
+        $results = ZohoContact::searchByEmail('nonexistent@example.com');
+
+        $this->assertInstanceOf(Collection::class, $results);
+        $this->assertCount(0, $results);
+    }
+
     public function test_upsert_sends_correct_payload(): void
     {
         Http::fake([

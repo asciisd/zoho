@@ -167,7 +167,7 @@ abstract class ZohoModel
                 throw ZohoApiException::requestFailed($error, $code);
             }
 
-            return $response->json();
+            return $response->json() ?? [];
         } catch (\Exception $e) {
             if (! ($e instanceof ZohoApiException)) {
                 Log::error('Zoho API request failed: '.$e->getMessage(), [
