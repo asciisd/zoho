@@ -44,23 +44,24 @@ class ZohoCall extends ZohoModel
             return $value;
         }
 
-        // Zoho CRM API v8 expects Call_Duration in "HH:mm" format (no seconds).
-        if (is_string($value) && preg_match('/^(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?$/', $value, $m)) {
-            if (isset($m[3])) {
-                return sprintf('%02d:%02d', (int) $m[1], (int) $m[2]);
-            }
+        // Zoho CRM expects Call_Duration in "mm:ss" format (minutes:seconds).
+        // "HH:mm:ss" input → convert hours to total minutes, keep seconds.
+        if (is_string($value) && preg_match('/^(\d+):(\d{1,2}):(\d{1,2})$/', $value, $m)) {
+            $totalMinutes = (int) $m[1] * 60 + (int) $m[2];
 
-            return sprintf('00:%02d', (int) $m[1]);
+            return sprintf('%02d:%02d', $totalMinutes, (int) $m[3]);
         }
 
+        // "mm:ss" input → normalize padding.
+        if (is_string($value) && preg_match('/^(\d+):(\d{1,2})$/', $value, $m)) {
+            return sprintf('%02d:%02d', (int) $m[1], (int) $m[2]);
+        }
+
+        // Bare number (int or numeric string) → interpret as minutes, zero seconds.
         if (is_numeric($value)) {
             $minutes = max(0, (int) $value);
 
-            return sprintf(
-                '%02d:%02d',
-                intdiv($minutes, 60),
-                $minutes % 60
-            );
+            return sprintf('%02d:00', $minutes);
         }
 
         return $value;

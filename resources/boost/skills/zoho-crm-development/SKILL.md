@@ -112,11 +112,11 @@ $count = Zoho::contacts()->count();
 
 ### Calls — `Call_Duration` normalization
 
-`ZohoCall` overrides `create`, `update`, `upsert`, and `updateMultiple` to normalize `Call_Duration` before sending. Zoho's Calls API expects `"HH:mm"` (no seconds), but the package accepts:
+`ZohoCall` overrides `create`, `update`, `upsert`, and `updateMultiple` to normalize `Call_Duration` before sending. Zoho's Calls API expects `"mm:ss"` (minutes:seconds), but the package accepts:
 
-- **Bare numbers as minutes** — `30` or `"30"` → `"00:30"`, `90` → `"01:30"`, `125` → `"02:05"`
-- **`"HH:mm:ss"` strings** — truncated to `"HH:mm"` (seconds dropped)
-- **`"mm:ss"` strings** — first segment taken as minutes → `"00:mm"`
+- **Bare numbers as minutes** — `30` or `"30"` → `"30:00"`, `90` → `"90:00"`, `125` → `"125:00"`
+- **`"HH:mm:ss"` strings** — converted to total minutes:seconds → `"01:02:05"` becomes `"62:05"`
+- **`"mm:ss"` strings** — normalized with zero-padding → `"5:30"` becomes `"05:30"`
 - **`null`, empty string, or non-numeric input** — passed through unchanged
 
 ```php
@@ -124,11 +124,21 @@ $count = Zoho::contacts()->count();
 Zoho::calls()->create([
     'Subject'       => 'Discovery call',
     'Call_Type'     => 'Outbound',
-    'Call_Duration' => 30,                 // sent as "00:30"
-    'Who_Id'        => $leadId,
+    'Call_Duration' => 30,                 // sent as "30:00"
+    'What_Id'       => $leadId,            // What_Id for Leads, Accounts, Deals
     '$se_module'    => 'Leads',
 ]);
+
+// Logging a call against a Contact (Who_Id, no $se_module needed)
+Zoho::calls()->create([
+    'Subject'       => 'Follow-up call',
+    'Call_Type'     => 'Outbound',
+    'Call_Duration' => 15,                 // sent as "15:00"
+    'Who_Id'        => $contactId,         // Who_Id is for Contacts only
+]);
 ```
+
+**`Who_Id` vs `What_Id`**: Use `Who_Id` only for Contacts (the person). For Leads, Accounts, Deals, and other modules, use `What_Id` with `$se_module` set to the module API name.
 
 Other modules pass payloads through unchanged — only `Calls` has this transformation.
 

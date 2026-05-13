@@ -65,7 +65,7 @@ Zoho::contacts()->upsert(
 
 ### Calls — `Call_Duration` Normalization
 
-`Zoho::calls()` normalizes `Call_Duration` on every write. Zoho's Calls API expects `"HH:mm"` (no seconds); the package accepts bare numbers as minutes and colon-separated time strings.
+`Zoho::calls()` normalizes `Call_Duration` on every write. Zoho's Calls API expects `"mm:ss"` (minutes:seconds); the package accepts bare numbers as minutes and colon-separated time strings.
 
 @verbatim
 <code-snippet name="Logging a call against a Lead" lang="php">
@@ -74,12 +74,14 @@ use Asciisd\Zoho\Facades\Zoho;
 Zoho::calls()->create([
     'Subject'       => 'Discovery call',
     'Call_Type'     => 'Outbound',
-    'Call_Duration' => 30,              // bare int → minutes → "00:30"
-    'Who_Id'        => $leadId,
+    'Call_Duration' => 30,              // bare int → minutes → "30:00"
+    'What_Id'       => $leadId,         // What_Id for Leads, Accounts, Deals
     '$se_module'    => 'Leads',
 ]);
 
-// "HH:mm:ss" strings are truncated to "HH:mm"; "mm:ss" takes the first segment as minutes → "00:mm".
+// Who_Id is for Contacts only. For Leads/Accounts/Deals, use What_Id + $se_module.
+// "HH:mm:ss" strings are converted to total mm:ss → "01:02:05" becomes "62:05".
+// "mm:ss" strings are zero-padded → "5:30" becomes "05:30".
 // null, "", and non-numeric strings pass through unchanged.
 </code-snippet>
 @endverbatim
